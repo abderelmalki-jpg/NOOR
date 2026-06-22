@@ -1,0 +1,47 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users can only read/write their own profile
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      // Mood logs
+      match /mood_logs/{logId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+
+      // Journal entries (private)
+      match /journal_entries/{entryId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+
+      // Reminders
+      match /reminders/{reminderId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+
+      // Streaks
+      match /user_streaks/{streakId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+    // Public content (read-only)
+    match /content_duas/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false; // Admin only via Firebase console
+    }
+
+    match /content_adhkar/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    match /content_reflections/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+  }
+}
