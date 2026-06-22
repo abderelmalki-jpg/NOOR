@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import { initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
-import { DUAS, ADHKAR, REFLECTIONS } from '../src/data/content.js';
+import { DUAS, ADHKAR, REFLECTIONS, RABBANA } from '../src/data/content.js';
 
 const serviceAccount = JSON.parse(readFileSync(new URL('../noor-27215-firebase-adminsdk-fbsvc-89468db037.json', import.meta.url)));
 
@@ -20,5 +20,6 @@ async function seedCollection(collectionName, items) {
 await seedCollection('content_duas', DUAS);
 await seedCollection('content_adhkar', ADHKAR);
 await seedCollection('content_reflections', REFLECTIONS);
+await seedCollection('content_rabbana', RABBANA);
 
 console.log('Seed terminé.');

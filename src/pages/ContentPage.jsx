@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const TABS = ['Adhkâr', 'Douas', 'Réflexions'];
+const TABS = ['Adhkâr', 'Douas', 'Rabbana', 'Réflexions'];
 
 function ArabicCard({ item }) {
   const [expanded, setExpanded] = useState(false);
@@ -91,18 +91,21 @@ export default function ContentPage() {
   const [duas, setDuas] = useState([]);
   const [adhkar, setAdhkar] = useState([]);
   const [reflections, setReflections] = useState([]);
+  const [rabbana, setRabbana] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchContent = async () => {
-      const [duasSnap, adhkarSnap, reflectionsSnap] = await Promise.all([
+      const [duasSnap, adhkarSnap, reflectionsSnap, rabbanaSnap] = await Promise.all([
         getDocs(collection(db, 'content_duas')),
         getDocs(collection(db, 'content_adhkar')),
-        getDocs(collection(db, 'content_reflections'))
+        getDocs(collection(db, 'content_reflections')),
+        getDocs(collection(db, 'content_rabbana'))
       ]);
       setDuas(duasSnap.docs.map(d => d.data()));
       setAdhkar(adhkarSnap.docs.map(d => d.data()));
       setReflections(reflectionsSnap.docs.map(d => d.data()));
+      setRabbana(rabbanaSnap.docs.map(d => d.data()).sort((a, b) => a.id.localeCompare(b.id)));
       setLoading(false);
     };
     fetchContent();
@@ -124,7 +127,7 @@ export default function ContentPage() {
       <div className="page-header">
         <div>
           <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--green-deep)' }}>Contenu islamique</h1>
-          <p style={{ color: 'var(--charcoal-light)', fontSize: '0.82rem' }}>Adhkâr · Douas · Réflexions</p>
+          <p style={{ color: 'var(--charcoal-light)', fontSize: '0.82rem' }}>Adhkâr · Douas · Rabbana · Réflexions</p>
         </div>
       </div>
 
@@ -191,6 +194,15 @@ export default function ContentPage() {
         )}
 
         {tab === 2 && (
+          <div className="fade-in">
+            <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', marginBottom: '1rem' }}>
+              Les 40 invocations coraniques commençant par « Rabbanâ — Ô notre Seigneur »
+            </p>
+            {rabbana.map(item => <ArabicCard key={item.id} item={item} />)}
+          </div>
+        )}
+
+        {tab === 3 && (
           <div className="fade-in">
             {reflections.map(item => <ReflectionCard key={item.id} item={item} />)}
           </div>

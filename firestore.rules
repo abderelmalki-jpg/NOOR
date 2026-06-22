@@ -43,5 +43,10 @@ service cloud.firestore {
       allow read: if request.auth != null;
       allow write: if false;
     }
+
+    match /content_rabbana/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
   }
 }
