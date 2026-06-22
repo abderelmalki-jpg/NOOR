@@ -22,8 +22,8 @@ const REMINDER_TIMES = [
 const slides = [
   {
     emoji: '☽',
-    title: 'Bienvenue dans Sakina',
-    subtitle: 'سكينة',
+    title: 'Bienvenue dans Nour',
+    subtitle: 'نور',
     body: 'Un espace calme et privé pour prendre soin de ton âme — à travers le dhikr, la respiration guidée, le journal et le suivi émotionnel.'
   },
   {

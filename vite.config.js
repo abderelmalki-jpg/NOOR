@@ -9,8 +9,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Sakina — Bien-être islamique',
-        short_name: 'Sakina',
+        name: 'Nour — Bien-être islamique',
+        short_name: 'Nour',
         description: 'Suivi émotionnel, adhkâr, respiration guidée et réflexions islamiques',
         theme_color: '#2D5016',
         background_color: '#F5F0E8',

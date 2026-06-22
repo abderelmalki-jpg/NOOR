@@ -45,7 +45,7 @@ export default function ProfilePage() {
         {/* Premium */}
         {!userProfile?.premium && (
           <div className="card" style={{ marginBottom: '1.25rem', background: 'var(--gold-light)', border: '1px solid rgba(184,150,62,0.2)' }}>
-            <p style={{ fontWeight: '600', fontSize: '0.95rem', marginBottom: '0.25rem' }}>✦ Sakina Premium</p>
+            <p style={{ fontWeight: '600', fontSize: '0.95rem', marginBottom: '0.25rem' }}>✦ Nour Premium</p>
             <p style={{ fontSize: '0.8rem', color: 'var(--charcoal-mid)', marginBottom: '0.75rem' }}>
               Bibliothèque complète, insights avancés, séries guidées, audio apaisants
             </p>
@@ -164,7 +164,7 @@ export default function ProfilePage() {
         )}
 
         <p style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--charcoal-light)', marginTop: '1.5rem' }}>
-          Sakina v1.0.0 · Fait avec ❤️ pour la Oumma
+          Nour v1.0.0 · Fait avec ❤️ pour la Oumma
         </p>
       </div>
     </div>

@@ -123,7 +123,7 @@ export default function BreathingPage() {
                 <p style={{ fontWeight: '600', fontSize: '0.9rem', marginBottom: '0.25rem', color: 'var(--charcoal)' }}>✦ Débloquer tout le contenu</p>
                 <p style={{ fontSize: '0.8rem', color: 'var(--charcoal-mid)', marginBottom: '0.75rem' }}>Séries guidées, audio apaisants, exercices exclusifs</p>
                 <button style={{ padding: '0.6rem 1.25rem', background: 'var(--gold-muted)', color: 'white', borderRadius: 'var(--radius-sm)', fontWeight: '600', fontSize: '0.85rem' }}>
-                  Voir Sakina Premium
+                  Voir Nour Premium
                 </button>
               </div>
             </>

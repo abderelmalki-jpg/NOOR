@@ -37,7 +37,7 @@ function AuthLayout({ children, title }) {
     <div style={{ minHeight: '100dvh', background: 'var(--beige)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '2rem 1.5rem' }}>
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>☽</div>
-        <h1 style={{ fontSize: '1.6rem', fontWeight: '600', color: 'var(--green-deep)' }}>Sakina</h1>
+        <h1 style={{ fontSize: '1.6rem', fontWeight: '600', color: 'var(--green-deep)' }}>Nour</h1>
         <p style={{ color: 'var(--charcoal-light)', fontSize: '0.85rem', marginTop: '0.25rem' }}>{title}</p>
       </div>
       {children}
@@ -140,7 +140,7 @@ export function RegisterPage() {
   };
 
   return (
-    <AuthLayout title="Crée ton espace Sakina">
+    <AuthLayout title="Crée ton espace Nour">
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {error && <div style={{ background: 'var(--danger-bg)', color: 'var(--danger)', padding: '0.75rem 1rem', borderRadius: 'var(--radius-sm)', fontSize: '0.9rem' }}>{error}</div>}
         <input type="text" placeholder="Ton prénom" value={form.name} onChange={e => setForm({...form, name: e.target.value})} required />
