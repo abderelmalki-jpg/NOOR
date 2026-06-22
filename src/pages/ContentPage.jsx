@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const TABS = ['Adhkâr', 'Douas', 'Rabbana', 'Réflexions'];
+const TABS = ['Adhkâr', 'Douas', 'Rabbana', 'Hadiths', 'Réflexions'];
 
 function ArabicCard({ item }) {
   const [expanded, setExpanded] = useState(false);
@@ -17,7 +17,7 @@ function ArabicCard({ item }) {
       <p className="arabic" style={{ fontSize: '1.4rem', color: 'var(--charcoal)', marginBottom: '0.5rem', lineHeight: '2.2' }}>{item.arabic}</p>
       {expanded && (
         <>
-          <p style={{ fontSize: '0.82rem', color: 'var(--charcoal-light)', fontStyle: 'italic', marginBottom: '0.25rem' }}>{item.transliteration}</p>
+          {item.transliteration && <p style={{ fontSize: '0.82rem', color: 'var(--charcoal-light)', fontStyle: 'italic', marginBottom: '0.25rem' }}>{item.transliteration}</p>}
           <p style={{ fontSize: '0.88rem', color: 'var(--charcoal)', marginBottom: '0.5rem' }}>{item.french}</p>
           <p style={{ fontSize: '0.75rem', color: 'var(--charcoal-light)', borderTop: '1px solid var(--border)', paddingTop: '0.5rem' }}>
             Source : {item.source}
@@ -92,20 +92,23 @@ export default function ContentPage() {
   const [adhkar, setAdhkar] = useState([]);
   const [reflections, setReflections] = useState([]);
   const [rabbana, setRabbana] = useState([]);
+  const [nawawi, setNawawi] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchContent = async () => {
-      const [duasSnap, adhkarSnap, reflectionsSnap, rabbanaSnap] = await Promise.all([
+      const [duasSnap, adhkarSnap, reflectionsSnap, rabbanaSnap, nawawiSnap] = await Promise.all([
         getDocs(collection(db, 'content_duas')),
         getDocs(collection(db, 'content_adhkar')),
         getDocs(collection(db, 'content_reflections')),
-        getDocs(collection(db, 'content_rabbana'))
+        getDocs(collection(db, 'content_rabbana')),
+        getDocs(collection(db, 'content_nawawi'))
       ]);
       setDuas(duasSnap.docs.map(d => d.data()));
       setAdhkar(adhkarSnap.docs.map(d => d.data()));
       setReflections(reflectionsSnap.docs.map(d => d.data()));
       setRabbana(rabbanaSnap.docs.map(d => d.data()).sort((a, b) => a.id.localeCompare(b.id)));
+      setNawawi(nawawiSnap.docs.map(d => d.data()).sort((a, b) => a.id.localeCompare(b.id)));
       setLoading(false);
     };
     fetchContent();
@@ -127,7 +130,7 @@ export default function ContentPage() {
       <div className="page-header">
         <div>
           <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--green-deep)' }}>Contenu islamique</h1>
-          <p style={{ color: 'var(--charcoal-light)', fontSize: '0.82rem' }}>Adhkâr · Douas · Rabbana · Réflexions</p>
+          <p style={{ color: 'var(--charcoal-light)', fontSize: '0.82rem' }}>Adhkâr · Douas · Rabbana · Hadiths · Réflexions</p>
         </div>
       </div>
 
@@ -203,6 +206,15 @@ export default function ContentPage() {
         )}
 
         {tab === 3 && (
+          <div className="fade-in">
+            <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', marginBottom: '1rem' }}>
+              Les 40 Hadiths de l'imam An-Nawawi (Al-Arba'ûn an-Nawawiyya)
+            </p>
+            {nawawi.map(item => <ArabicCard key={item.id} item={item} />)}
+          </div>
+        )}
+
+        {tab === 4 && (
           <div className="fade-in">
             {reflections.map(item => <ReflectionCard key={item.id} item={item} />)}
           </div>
