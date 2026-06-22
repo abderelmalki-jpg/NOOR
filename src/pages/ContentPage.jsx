@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { DUAS, ADHKAR, REFLECTIONS } from '../data/content';
+import { useState, useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const TABS = ['Adhkâr', 'Douas', 'Réflexions'];
 
@@ -87,9 +88,36 @@ function ReflectionCard({ item }) {
 export default function ContentPage() {
   const [tab, setTab] = useState(0);
   const [duaFilter, setDuaFilter] = useState('all');
+  const [duas, setDuas] = useState([]);
+  const [adhkar, setAdhkar] = useState([]);
+  const [reflections, setReflections] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      const [duasSnap, adhkarSnap, reflectionsSnap] = await Promise.all([
+        getDocs(collection(db, 'content_duas')),
+        getDocs(collection(db, 'content_adhkar')),
+        getDocs(collection(db, 'content_reflections'))
+      ]);
+      setDuas(duasSnap.docs.map(d => d.data()));
+      setAdhkar(adhkarSnap.docs.map(d => d.data()));
+      setReflections(reflectionsSnap.docs.map(d => d.data()));
+      setLoading(false);
+    };
+    fetchContent();
+  }, []);
 
   const DUA_FILTERS = ['all', 'anxiete', 'stress', 'tristesse', 'sommeil', 'gratitude'];
-  const filteredDuas = duaFilter === 'all' ? DUAS : DUAS.filter(d => d.category === duaFilter);
+  const filteredDuas = duaFilter === 'all' ? duas : duas.filter(d => d.category === duaFilter);
+
+  if (loading) {
+    return (
+      <div className="page fade-in" style={{ padding: '2rem 1.25rem', textAlign: 'center', color: 'var(--charcoal-light)' }}>
+        Chargement…
+      </div>
+    );
+  }
 
   return (
     <div className="page fade-in">
@@ -131,7 +159,7 @@ export default function ContentPage() {
             <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', marginBottom: '1rem' }}>
               Appuie pour compter tes dhikr du jour
             </p>
-            {ADHKAR.map(item => <AdhkarCard key={item.id} item={item} />)}
+            {adhkar.map(item => <AdhkarCard key={item.id} item={item} />)}
           </div>
         )}
 
@@ -164,7 +192,7 @@ export default function ContentPage() {
 
         {tab === 2 && (
           <div className="fade-in">
-            {REFLECTIONS.map(item => <ReflectionCard key={item.id} item={item} />)}
+            {reflections.map(item => <ReflectionCard key={item.id} item={item} />)}
           </div>
         )}
       </div>

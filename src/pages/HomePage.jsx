@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { db } from '../firebase';
 import { collection, query, where, orderBy, limit, getDocs } from 'firebase/firestore';
-import { DUAS, MOOD_LABELS } from '../data/content';
+import { MOOD_LABELS } from '../data/content';
 
 const SALAMS = [
   'السَّلَامُ عَلَيْكُمْ',
@@ -36,9 +36,18 @@ export default function HomePage() {
   const navigate = useNavigate();
   const [todayMood, setTodayMood] = useState(null);
   const [streak, setStreak] = useState(3); // TODO: calculate from Firestore streak doc
-  const [dailyDua] = useState(DUAS[Math.floor(Math.random() * DUAS.length)]);
+  const [dailyDua, setDailyDua] = useState(null);
   const [weekMoods, setWeekMoods] = useState([]);
   const [showEmergency, setShowEmergency] = useState(false);
+
+  useEffect(() => {
+    const fetchDailyDua = async () => {
+      const snap = await getDocs(collection(db, 'content_duas'));
+      const duas = snap.docs.map(d => d.data());
+      if (duas.length) setDailyDua(duas[Math.floor(Math.random() * duas.length)]);
+    };
+    fetchDailyDua();
+  }, []);
 
   useEffect(() => {
     if (!user) return;
@@ -128,15 +137,17 @@ export default function HomePage() {
         )}
 
         {/* Dua du jour */}
-        <div className="card" style={{ marginBottom: '1rem', border: '1px solid var(--gold-light)', background: 'var(--off-white)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--gold-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Doua du jour</span>
-            <span style={{ fontSize: '0.75rem', color: 'var(--charcoal-light)' }}>{dailyDua.source}</span>
+        {dailyDua && (
+          <div className="card" style={{ marginBottom: '1rem', border: '1px solid var(--gold-light)', background: 'var(--off-white)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--gold-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Doua du jour</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--charcoal-light)' }}>{dailyDua.source}</span>
+            </div>
+            <p className="arabic" style={{ fontSize: '1.3rem', color: 'var(--charcoal)', marginBottom: '0.5rem' }}>{dailyDua.arabic}</p>
+            <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.88rem', fontStyle: 'italic', marginBottom: '0.25rem' }}>{dailyDua.transliteration}</p>
+            <p style={{ color: 'var(--charcoal)', fontSize: '0.9rem' }}>{dailyDua.french}</p>
           </div>
-          <p className="arabic" style={{ fontSize: '1.3rem', color: 'var(--charcoal)', marginBottom: '0.5rem' }}>{dailyDua.arabic}</p>
-          <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.88rem', fontStyle: 'italic', marginBottom: '0.25rem' }}>{dailyDua.transliteration}</p>
-          <p style={{ color: 'var(--charcoal)', fontSize: '0.9rem' }}>{dailyDua.french}</p>
-        </div>
+        )}
 
         {/* Shortcuts */}
         <p className="section-title">Comment puis-je t'aider ?</p>
