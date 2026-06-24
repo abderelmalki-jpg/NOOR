@@ -74,7 +74,13 @@ export default function HomePage() {
   return (
     <div className="page fade-in">
       {/* Header */}
-      <div style={{ background: 'linear-gradient(180deg, var(--green-deep) 0%, var(--green-mid) 100%)', padding: '3rem 1.5rem 2rem', color: 'white' }}>
+      <div style={{
+        background: "linear-gradient(180deg, rgba(45,80,22,0.88) 0%, rgba(74,124,89,0.85) 100%), url('/art-arch-frame.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 30%',
+        padding: '3rem 1.5rem 2rem',
+        color: 'white'
+      }}>
         <p style={{ fontSize: '1rem', opacity: 0.7, marginBottom: '0.25rem', fontFamily: 'var(--font-arabic)' }}>
           {SALAMS[new Date().getDay() % SALAMS.length]}
         </p>
