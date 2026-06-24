@@ -365,6 +365,15 @@ export const ANNUAIRE = [
     email: "contact@assohayat.com"
   },
   {
+    id: "annuaire_famille_unie",
+    category: "psychologue",
+    name: "Famille Unie",
+    description: "Accompagnement psychosocial en ligne (consultations individuelles, médiation de couple et familiale, soutien parental), ancré dans les valeurs islamiques.",
+    country: "🇫🇷 France (en ligne)",
+    website: "https://famille-unie.com",
+    email: "contact@famille-unie.com"
+  },
+  {
     id: "annuaire_cfcm",
     category: "institution",
     name: "Conseil Français du Culte Musulman (CFCM)",
