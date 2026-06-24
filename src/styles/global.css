@@ -132,6 +132,11 @@ html, body {
   position: relative;
 }
 
+/* La landing /welcome est une page marketing plein écran, pas l'app mobile */
+body.landing-page #root {
+  max-width: none;
+}
+
 .arabic {
   font-family: var(--font-arabic);
   direction: rtl;

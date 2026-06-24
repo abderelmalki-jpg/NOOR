@@ -16,6 +16,7 @@ import ContentPage from './pages/ContentPage';
 import SupportPage from './pages/SupportPage';
 import ProfilePage from './pages/ProfilePage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import WelcomePage from './pages/WelcomePage';
 import Layout from './components/Layout';
 
 function ProtectedRoute({ children }) {
@@ -61,6 +62,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/onboarding" element={<OnboardingPage />} />
       <Route path="/privacy" element={<PrivacyPolicyPage />} />
+      <Route path="/welcome" element={<WelcomePage />} />
       <Route path="/login" element={user ? <Navigate to="/" /> : <LoginPage />} />
       <Route path="/register" element={user ? <Navigate to="/" /> : <RegisterPage />} />
       <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>

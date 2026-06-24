@@ -9,3 +9,5 @@ serviceAccountKey.json
 *firebase-adminsdk*.json
 design-assets
 release-builds
+.aidesigner/*
+!.aidesigner/.gitkeep
