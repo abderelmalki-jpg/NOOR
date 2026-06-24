@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
 
         <h2 style={{ fontSize: '1.05rem', fontWeight: '600', color: 'var(--charcoal)', marginTop: '1.75rem', marginBottom: '0.6rem' }}>1. Qui sommes-nous</h2>
         <p style={{ marginBottom: '1.25rem' }}>
-          Nour est un projet indépendant. Pour toute question relative à tes données personnelles, contacte-nous à : <a href="mailto:elmalkidigital@gmail.com" style={{ color: 'var(--green-mid)' }}>elmalkidigital@gmail.com</a>.
+          Nour est un projet indépendant. Pour toute question relative à tes données personnelles, contacte-nous à : <a href="mailto:abderelmalki@gmail.com" style={{ color: 'var(--green-mid)' }}>abderelmalki@gmail.com</a>.
         </p>
 
         <h2 style={{ fontSize: '1.05rem', fontWeight: '600', color: 'var(--charcoal)', marginTop: '1.75rem', marginBottom: '0.6rem' }}>2. Données que nous collectons</h2>
@@ -57,7 +57,7 @@ export default function PrivacyPolicyPage() {
           <li>Corriger les informations de ton profil directement dans l'application.</li>
         </ul>
         <p style={{ marginBottom: '1.25rem' }}>
-          Pour exercer ces droits, écris-nous à <a href="mailto:elmalkidigital@gmail.com" style={{ color: 'var(--green-mid)' }}>elmalkidigital@gmail.com</a> depuis l'adresse email associée à ton compte. Nous traitons les demandes de suppression dans un délai de 30 jours.
+          Pour exercer ces droits, écris-nous à <a href="mailto:abderelmalki@gmail.com" style={{ color: 'var(--green-mid)' }}>abderelmalki@gmail.com</a> depuis l'adresse email associée à ton compte. Nous traitons les demandes de suppression dans un délai de 30 jours.
         </p>
 
         <h2 style={{ fontSize: '1.05rem', fontWeight: '600', color: 'var(--charcoal)', marginTop: '1.75rem', marginBottom: '0.6rem' }}>7. Sécurité</h2>

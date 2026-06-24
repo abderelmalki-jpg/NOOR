@@ -220,7 +220,7 @@ export default function WelcomePage() {
         <img src="/logo-nour.png" alt="Nour" style={{ height: '28px', marginBottom: '1rem', opacity: 0.8 }} />
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginBottom: '1rem', fontSize: '0.85rem' }}>
           <a href="/privacy" style={{ color: 'var(--charcoal-light)' }}>Politique de confidentialité</a>
-          <a href="mailto:elmalkidigital@gmail.com" style={{ color: 'var(--charcoal-light)' }}>Contact</a>
+          <a href="mailto:abderelmalki@gmail.com" style={{ color: 'var(--charcoal-light)' }}>Contact</a>
         </div>
         <p style={{ fontSize: '0.78rem', color: 'var(--charcoal-light)' }}>© 2026 Nour · Fait avec ❤️ pour la Oumma</p>
       </footer>
