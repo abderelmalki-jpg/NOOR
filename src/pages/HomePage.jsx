@@ -35,7 +35,6 @@ export default function HomePage() {
   const { user, userProfile } = useAuth();
   const navigate = useNavigate();
   const [todayMood, setTodayMood] = useState(null);
-  const [streak, setStreak] = useState(3); // TODO: calculate from Firestore streak doc
   const [dailyDua, setDailyDua] = useState(null);
   const [weekMoods, setWeekMoods] = useState([]);
   const [showEmergency, setShowEmergency] = useState(false);
@@ -90,15 +89,7 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Streak */}
         <div style={{ marginTop: '1.25rem', display: 'flex', gap: '0.75rem' }}>
-          <div style={{ background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--radius-sm)', padding: '0.6rem 1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span style={{ fontSize: '1.1rem' }}>🔥</span>
-            <div>
-              <p style={{ fontSize: '1.1rem', fontWeight: '700', lineHeight: 1 }}>{streak}</p>
-              <p style={{ fontSize: '0.7rem', opacity: 0.75 }}>jours de suite</p>
-            </div>
-          </div>
           {todayMood ? (
             <div style={{ background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--radius-sm)', padding: '0.6rem 1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <span style={{ fontSize: '1.1rem' }}>{MOOD_LABELS[todayMood.mood]?.emoji}</span>
