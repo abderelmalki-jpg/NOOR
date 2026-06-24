@@ -126,10 +126,9 @@ export default function SupportPage() {
         <div className="card" style={{ marginTop: '1rem' }}>
           <p style={{ fontWeight: '600', marginBottom: '0.4rem', fontSize: '0.9rem' }}>🔒 Confidentialité</p>
           <p style={{ fontSize: '0.82rem', color: 'var(--charcoal-mid)', lineHeight: '1.6' }}>
-            Tes données sont privées et ne sont jamais partagées avec des tiers. Tu peux exporter ou supprimer toutes tes données depuis les paramètres.
+            Tes données sont privées et ne sont jamais partagées avec des tiers. Tu peux demander l'export ou la suppression de toutes tes données — voir notre politique de confidentialité ci-dessous.
           </p>
-          <button style={{ marginTop: '0.75rem', fontSize: '0.82rem', color: 'var(--charcoal-light)', textDecoration: 'underline' }}>
-            {/* TODO: Link to privacy policy page */}
+          <button onClick={() => navigate('/privacy')} style={{ marginTop: '0.75rem', fontSize: '0.82rem', color: 'var(--charcoal-light)', textDecoration: 'underline' }}>
             Politique de confidentialité →
           </button>
         </div>
