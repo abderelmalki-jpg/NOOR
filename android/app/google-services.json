@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "92160312647",
+    "firebase_url": "https://noor-27215-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "noor-27215",
+    "storage_bucket": "noor-27215.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92160312647:android:6ec19e071879f983c77862",
+        "android_client_info": {
+          "package_name": "com.nour.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "92160312647-ho762aloso2cbjtar15t49jtbffvco2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9OSlU1t2Vww3bfesmxIZCCDf4h2c_9XM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92160312647-ho762aloso2cbjtar15t49jtbffvco2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
