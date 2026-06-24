@@ -1,4 +1,4 @@
-package com.nour.app;
+package com.elmalkidigital.nour;
 
 import com.getcapacitor.BridgeActivity;
 
