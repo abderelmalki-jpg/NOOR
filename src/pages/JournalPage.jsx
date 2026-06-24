@@ -145,7 +145,7 @@ export default function JournalPage() {
                     </p>
                     <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
                       {e.tags?.map(tag => (
-                        <span key={tag} style={{ fontSize: '0.7rem', padding: '2px 8px', background: 'var(--accent-light)', color: 'var(--accent-deep)', borderRadius: '20px', fontWeight: '500' }}>{tag}</span>
+                        <span key={tag} style={{ fontSize: '0.7rem', padding: '2px 8px', background: 'var(--accent-light)', color: 'var(--accent-deep)', borderRadius: 'var(--radius-full)', fontWeight: '500' }}>{tag}</span>
                       ))}
                       <span style={{ marginLeft: 'auto', fontSize: '0.72rem', color: 'var(--charcoal-light)' }}>
                         {e.createdAt?.toDate ? e.createdAt.toDate().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }) : 'Aujourd\'hui'}
@@ -187,7 +187,7 @@ export default function JournalPage() {
                     onClick={() => toggleTag(tag)}
                     style={{
                       padding: '4px 12px',
-                      borderRadius: '20px',
+                      borderRadius: 'var(--radius-full)',
                       fontSize: '0.78rem',
                       border: `1.5px solid ${selectedTags.includes(tag) ? 'var(--accent-mid)' : 'var(--border)'}`,
                       background: selectedTags.includes(tag) ? 'var(--accent-light)' : 'transparent',

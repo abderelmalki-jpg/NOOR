@@ -171,7 +171,7 @@ export default function MoodPage() {
                       onClick={() => toggleTrigger(t.id)}
                       style={{
                         padding: '0.5rem 0.9rem',
-                        borderRadius: '20px',
+                        borderRadius: 'var(--radius-full)',
                         border: `1.5px solid ${selectedTriggers.includes(t.id) ? 'var(--accent-mid)' : 'var(--border)'}`,
                         background: selectedTriggers.includes(t.id) ? 'var(--accent-light)' : 'var(--surface)',
                         color: selectedTriggers.includes(t.id) ? 'var(--accent-deep)' : 'var(--charcoal-mid)',

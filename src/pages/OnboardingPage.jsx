@@ -84,7 +84,7 @@ export default function OnboardingPage() {
                 onClick={() => toggleGoal(g.id)}
                 style={{
                   padding: '0.6rem 1rem',
-                  borderRadius: '20px',
+                  borderRadius: 'var(--radius-full)',
                   border: `1.5px solid ${selectedGoals.includes(g.id) ? 'var(--green-mid)' : 'var(--border)'}`,
                   background: selectedGoals.includes(g.id) ? 'var(--green-light)' : 'var(--surface)',
                   color: selectedGoals.includes(g.id) ? 'var(--green-deep)' : 'var(--charcoal-mid)',

@@ -17,22 +17,22 @@ function AnnuaireCard({ item }) {
       <p style={{ fontSize: '0.85rem', color: 'var(--charcoal-mid)', lineHeight: '1.5', marginBottom: '0.75rem' }}>{item.description}</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
         {item.website && (
-          <a href={item.website} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--accent-light)', color: 'var(--accent-deep)', borderRadius: '20px', fontWeight: '500', textDecoration: 'none' }}>
+          <a href={item.website} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--accent-light)', color: 'var(--accent-deep)', borderRadius: 'var(--radius-full)', fontWeight: '500', textDecoration: 'none' }}>
             🔗 Site web
           </a>
         )}
         {item.phone && (
-          <a href={`tel:${item.phone}`} style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--charcoal)', borderRadius: '20px', fontWeight: '500', textDecoration: 'none' }}>
+          <a href={`tel:${item.phone}`} style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--charcoal)', borderRadius: 'var(--radius-full)', fontWeight: '500', textDecoration: 'none' }}>
             📞 {item.phone}
           </a>
         )}
         {item.whatsapp && (
-          <a href={`https://wa.me/${item.whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--charcoal)', borderRadius: '20px', fontWeight: '500', textDecoration: 'none' }}>
+          <a href={`https://wa.me/${item.whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--charcoal)', borderRadius: 'var(--radius-full)', fontWeight: '500', textDecoration: 'none' }}>
             💬 WhatsApp
           </a>
         )}
         {item.email && (
-          <a href={`mailto:${item.email}`} style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--charcoal)', borderRadius: '20px', fontWeight: '500', textDecoration: 'none' }}>
+          <a href={`mailto:${item.email}`} style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--charcoal)', borderRadius: 'var(--radius-full)', fontWeight: '500', textDecoration: 'none' }}>
             ✉️ Email
           </a>
         )}

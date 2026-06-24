@@ -10,7 +10,7 @@ function ArabicCard({ item }) {
     <div className="card" style={{ marginBottom: '0.75rem' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
         <p style={{ fontWeight: '600', fontSize: '0.9rem', flex: 1 }}>{item.title}</p>
-        <span style={{ fontSize: '0.7rem', background: 'var(--accent-light)', color: 'var(--accent-deep)', padding: '2px 8px', borderRadius: '20px', fontWeight: '500', marginLeft: '0.5rem', flexShrink: 0 }}>
+        <span style={{ fontSize: '0.7rem', background: 'var(--accent-light)', color: 'var(--accent-deep)', padding: '2px 8px', borderRadius: 'var(--radius-full)', fontWeight: '500', marginLeft: '0.5rem', flexShrink: 0 }}>
           {item.authenticity || 'Authentique'}
         </span>
       </div>
@@ -71,7 +71,7 @@ function ReflectionCard({ item }) {
   return (
     <div className="card" style={{ marginBottom: '0.75rem', borderLeft: '3px solid var(--accent-mid)' }}>
       <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '0.75rem' }}>
-        <span style={{ fontSize: '0.7rem', background: item.type === 'quran' ? 'var(--green-light)' : 'var(--gold-light)', color: item.type === 'quran' ? 'var(--green-deep)' : 'var(--gold-muted)', padding: '2px 8px', borderRadius: '20px', fontWeight: '600' }}>
+        <span style={{ fontSize: '0.7rem', background: item.type === 'quran' ? 'var(--green-light)' : 'var(--gold-light)', color: item.type === 'quran' ? 'var(--green-deep)' : 'var(--gold-muted)', padding: '2px 8px', borderRadius: 'var(--radius-full)', fontWeight: '600' }}>
           {item.type === 'quran' ? 'Coran' : 'Hadith'}
         </span>
         <span style={{ fontSize: '0.8rem', color: 'var(--charcoal-light)' }}>{item.source}</span>
@@ -179,7 +179,7 @@ export default function ContentPage() {
                   style={{
                     flexShrink: 0,
                     padding: '0.4rem 0.9rem',
-                    borderRadius: '20px',
+                    borderRadius: 'var(--radius-full)',
                     border: `1.5px solid ${duaFilter === f ? 'var(--accent-mid)' : 'var(--border)'}`,
                     background: duaFilter === f ? 'var(--accent-light)' : 'transparent',
                     color: duaFilter === f ? 'var(--accent-deep)' : 'var(--charcoal-light)',

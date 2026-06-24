@@ -21,6 +21,17 @@
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* Échelle d'espacement (base 4px) */
+  --space-xxs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-base: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
   --font-arabic: 'Amiri', serif;
   --font-body: 'DM Sans', system-ui, sans-serif;
   --shadow-soft: 0 2px 12px rgba(44, 42, 38, 0.06);
@@ -245,7 +256,7 @@ input:focus, textarea:focus, select:focus {
   font-size: 0.7rem;
   font-weight: 600;
   padding: 2px 8px;
-  border-radius: 20px;
+  border-radius: var(--radius-full);
   border: 1px solid rgba(184, 150, 62, 0.3);
 }
 
