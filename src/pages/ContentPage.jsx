@@ -10,7 +10,7 @@ function ArabicCard({ item }) {
     <div className="card" style={{ marginBottom: '0.75rem' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
         <p style={{ fontWeight: '600', fontSize: '0.9rem', flex: 1 }}>{item.title}</p>
-        <span style={{ fontSize: '0.7rem', background: 'var(--green-light)', color: 'var(--green-deep)', padding: '2px 8px', borderRadius: '20px', fontWeight: '500', marginLeft: '0.5rem', flexShrink: 0 }}>
+        <span style={{ fontSize: '0.7rem', background: 'var(--accent-light)', color: 'var(--accent-deep)', padding: '2px 8px', borderRadius: '20px', fontWeight: '500', marginLeft: '0.5rem', flexShrink: 0 }}>
           {item.authenticity || 'Authentique'}
         </span>
       </div>
@@ -26,7 +26,7 @@ function ArabicCard({ item }) {
       )}
       <button
         onClick={() => setExpanded(!expanded)}
-        style={{ color: 'var(--green-mid)', fontSize: '0.82rem', fontWeight: '500', marginTop: '0.25rem' }}
+        style={{ color: 'var(--accent-mid)', fontSize: '0.82rem', fontWeight: '500', marginTop: '0.25rem' }}
       >
         {expanded ? '↑ Réduire' : '↓ Voir la traduction'}
       </button>
@@ -41,7 +41,7 @@ function AdhkarCard({ item }) {
     <div className="card" style={{ marginBottom: '0.75rem', opacity: done ? 0.7 : 1 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
         <p style={{ fontWeight: '600', fontSize: '0.9rem' }}>{item.title}</p>
-        <span style={{ fontSize: '0.8rem', color: done ? 'var(--green-mid)' : 'var(--charcoal-light)' }}>
+        <span style={{ fontSize: '0.8rem', color: done ? 'var(--accent-mid)' : 'var(--charcoal-light)' }}>
           {count}/{item.repetitions}
         </span>
       </div>
@@ -53,8 +53,8 @@ function AdhkarCard({ item }) {
         style={{
           width: '100%',
           padding: '0.75rem',
-          background: done ? 'var(--green-light)' : 'var(--green-deep)',
-          color: done ? 'var(--green-deep)' : 'white',
+          background: done ? 'var(--accent-light)' : 'var(--accent-deep)',
+          color: done ? 'var(--accent-deep)' : 'white',
           borderRadius: 'var(--radius-sm)',
           fontWeight: '600',
           fontSize: '0.9rem',
@@ -69,7 +69,7 @@ function AdhkarCard({ item }) {
 
 function ReflectionCard({ item }) {
   return (
-    <div className="card" style={{ marginBottom: '0.75rem', borderLeft: '3px solid var(--green-mid)' }}>
+    <div className="card" style={{ marginBottom: '0.75rem', borderLeft: '3px solid var(--accent-mid)' }}>
       <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '0.75rem' }}>
         <span style={{ fontSize: '0.7rem', background: item.type === 'quran' ? 'var(--green-light)' : 'var(--gold-light)', color: item.type === 'quran' ? 'var(--green-deep)' : 'var(--gold-muted)', padding: '2px 8px', borderRadius: '20px', fontWeight: '600' }}>
           {item.type === 'quran' ? 'Coran' : 'Hadith'}
@@ -126,10 +126,10 @@ export default function ContentPage() {
   }
 
   return (
-    <div className="page fade-in">
+    <div className="page fade-in theme-gold">
       <div className="page-header">
         <div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--green-deep)' }}>Contenu islamique</h1>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--accent-deep)' }}>Contenu islamique</h1>
           <p style={{ color: 'var(--charcoal-light)', fontSize: '0.82rem' }}>Adhkâr · Douas · Rabbana · Hadiths · Réflexions</p>
         </div>
       </div>
@@ -144,8 +144,8 @@ export default function ContentPage() {
               flex: 1,
               padding: '0.75rem 0',
               fontWeight: tab === i ? '600' : '400',
-              color: tab === i ? 'var(--green-deep)' : 'var(--charcoal-light)',
-              borderBottom: tab === i ? '2px solid var(--green-deep)' : '2px solid transparent',
+              color: tab === i ? 'var(--accent-deep)' : 'var(--charcoal-light)',
+              borderBottom: tab === i ? '2px solid var(--accent-deep)' : '2px solid transparent',
               fontSize: '0.88rem',
               transition: 'all 0.2s'
             }}
@@ -180,9 +180,9 @@ export default function ContentPage() {
                     flexShrink: 0,
                     padding: '0.4rem 0.9rem',
                     borderRadius: '20px',
-                    border: `1.5px solid ${duaFilter === f ? 'var(--green-mid)' : 'var(--border)'}`,
-                    background: duaFilter === f ? 'var(--green-light)' : 'transparent',
-                    color: duaFilter === f ? 'var(--green-deep)' : 'var(--charcoal-light)',
+                    border: `1.5px solid ${duaFilter === f ? 'var(--accent-mid)' : 'var(--border)'}`,
+                    background: duaFilter === f ? 'var(--accent-light)' : 'transparent',
+                    color: duaFilter === f ? 'var(--accent-deep)' : 'var(--charcoal-light)',
                     fontSize: '0.82rem',
                     fontWeight: duaFilter === f ? '500' : '400',
                     textTransform: 'capitalize'

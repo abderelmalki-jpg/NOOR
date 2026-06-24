@@ -20,15 +20,15 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="page fade-in">
+    <div className="page fade-in theme-rose">
       <div className="page-header">
-        <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--green-deep)' }}>Profil & Paramètres</h1>
+        <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--accent-deep)' }}>Profil & Paramètres</h1>
       </div>
 
       <div style={{ padding: '1.25rem' }}>
         {/* User card */}
         <div className="card" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
-          <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'var(--green-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.3rem', fontWeight: '600', color: 'var(--green-deep)', flexShrink: 0 }}>
+          <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'var(--accent-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.3rem', fontWeight: '600', color: 'var(--accent-deep)', flexShrink: 0 }}>
             {user?.displayName?.charAt(0)?.toUpperCase() || '☽'}
           </div>
           <div>
@@ -71,9 +71,9 @@ export default function ProfilePage() {
                   flex: 1,
                   padding: '0.65rem',
                   borderRadius: 'var(--radius-sm)',
-                  border: `1.5px solid ${theme === val ? 'var(--green-mid)' : 'var(--border)'}`,
-                  background: theme === val ? 'var(--green-light)' : 'transparent',
-                  color: theme === val ? 'var(--green-deep)' : 'var(--charcoal-mid)',
+                  border: `1.5px solid ${theme === val ? 'var(--accent-mid)' : 'var(--border)'}`,
+                  background: theme === val ? 'var(--accent-light)' : 'transparent',
+                  color: theme === val ? 'var(--accent-deep)' : 'var(--charcoal-mid)',
                   fontWeight: theme === val ? '500' : '400',
                   fontSize: '0.85rem'
                 }}
@@ -116,7 +116,7 @@ export default function ProfilePage() {
               <p style={{ fontSize: '0.8rem', color: 'var(--charcoal-light)' }}>Journal et humeurs en JSON</p>
             </div>
             {/* TODO: Implement data export */}
-            <span style={{ color: 'var(--green-mid)' }}>→</span>
+            <span style={{ color: 'var(--accent-mid)' }}>→</span>
           </button>
         </div>
 

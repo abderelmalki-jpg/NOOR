@@ -74,10 +74,10 @@ export default function BreathingPage() {
   const progress = exercise ? (elapsed / exercise.duration) * 100 : 0;
 
   return (
-    <div className="page fade-in">
+    <div className="page fade-in theme-blue">
       <div className="page-header">
         <div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--green-deep)' }}>Respiration & Calme</h1>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--accent-deep)' }}>Respiration & Calme</h1>
           <p style={{ color: 'var(--charcoal-light)', fontSize: '0.82rem' }}>Exerce-toi à la présence — الحضور</p>
         </div>
       </div>
@@ -104,7 +104,7 @@ export default function BreathingPage() {
                       opacity: ex.premium ? 0.7 : 1
                     }}
                   >
-                    <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'var(--green-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.3rem', flexShrink: 0 }}>
+                    <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'var(--accent-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.3rem', flexShrink: 0 }}>
                       {ex.premium ? '🔒' : '🌬'}
                     </div>
                     <div style={{ flex: 1 }}>
@@ -132,7 +132,7 @@ export default function BreathingPage() {
               <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🌬</div>
               <h2 style={{ fontSize: '1.3rem', fontWeight: '600', marginBottom: '0.5rem' }}>{exercise.title}</h2>
               <p style={{ color: 'var(--charcoal-mid)', marginBottom: '0.5rem', fontSize: '0.9rem' }}>{exercise.description}</p>
-              <p style={{ color: 'var(--green-mid)', fontSize: '0.82rem', marginBottom: '0.5rem' }}>Dhikr associé : {exercise.dhikr}</p>
+              <p style={{ color: 'var(--accent-mid)', fontSize: '0.82rem', marginBottom: '0.5rem' }}>Dhikr associé : {exercise.dhikr}</p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem', margin: '1.5rem 0', textAlign: 'center' }}>
                 {[['Inspire', exercise.inhale+'s'], ['Retiens', exercise.hold1 ? exercise.hold1+'s' : '—'], ['Expire', exercise.exhale+'s'], ['Pause', exercise.hold2 ? exercise.hold2+'s' : '—']].map(([label, val]) => (
                   <div key={label} style={{ background: 'var(--surface-2)', borderRadius: 'var(--radius-sm)', padding: '0.75rem' }}>
@@ -143,7 +143,7 @@ export default function BreathingPage() {
               </div>
               <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
                 <button onClick={() => setSelected(null)} style={{ padding: '0.85rem 1.5rem', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', color: 'var(--charcoal-mid)' }}>Retour</button>
-                <button onClick={startExercise} style={{ padding: '0.85rem 2rem', background: 'var(--green-deep)', color: 'white', borderRadius: 'var(--radius-md)', fontWeight: '600', fontSize: '1rem' }}>
+                <button onClick={startExercise} style={{ padding: '0.85rem 2rem', background: 'var(--accent-deep)', color: 'white', borderRadius: 'var(--radius-md)', fontWeight: '600', fontSize: '1rem' }}>
                   Commencer
                 </button>
               </div>
@@ -158,8 +158,8 @@ export default function BreathingPage() {
             width: '200px',
             height: '200px',
             borderRadius: '50%',
-            background: `radial-gradient(circle, var(--green-light) 0%, transparent 70%)`,
-            border: `3px solid var(--green-soft)`,
+            background: `radial-gradient(circle, var(--accent-light) 0%, transparent 70%)`,
+            border: `3px solid var(--accent-mid)`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -169,8 +169,8 @@ export default function BreathingPage() {
             transform: phase === 0 ? 'scale(1.1)' : phase === 2 ? 'scale(0.9)' : 'scale(1)'
           }}>
             <div style={{ textAlign: 'center' }}>
-              <p style={{ fontSize: '2.5rem', fontWeight: '300', color: 'var(--green-deep)', lineHeight: 1 }}>{countdown}</p>
-              <p style={{ color: 'var(--green-mid)', fontWeight: '500', marginTop: '0.25rem' }}>
+              <p style={{ fontSize: '2.5rem', fontWeight: '300', color: 'var(--accent-deep)', lineHeight: 1 }}>{countdown}</p>
+              <p style={{ color: 'var(--accent-mid)', fontWeight: '500', marginTop: '0.25rem' }}>
                 {phaseNames[phase % phaseNames.length]}
               </p>
             </div>
@@ -185,7 +185,7 @@ export default function BreathingPage() {
 
           {/* Progress bar */}
           <div style={{ width: '100%', height: '4px', background: 'var(--border)', borderRadius: '2px', marginBottom: '2rem' }}>
-            <div style={{ height: '100%', background: 'var(--green-mid)', borderRadius: '2px', width: `${progress}%`, transition: 'width 1s linear' }} />
+            <div style={{ height: '100%', background: 'var(--accent-mid)', borderRadius: '2px', width: `${progress}%`, transition: 'width 1s linear' }} />
           </div>
 
           <button onClick={stopExercise} style={{ padding: '0.85rem 2rem', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', color: 'var(--charcoal-mid)', background: 'var(--surface)' }}>

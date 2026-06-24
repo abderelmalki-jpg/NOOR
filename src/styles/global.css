@@ -25,6 +25,43 @@
   --font-body: 'DM Sans', system-ui, sans-serif;
   --shadow-soft: 0 2px 12px rgba(44, 42, 38, 0.06);
   --shadow-card: 0 1px 4px rgba(44, 42, 38, 0.08);
+
+  /* Accent par défaut (vert) — chaque écran peut le surcharger via .theme-* */
+  --accent-deep: var(--green-deep);
+  --accent-mid: var(--green-mid);
+  --accent-light: var(--green-light);
+}
+
+/* Palette pastel apaisante par écran */
+.theme-orange {
+  --accent-deep: #C97B3D;
+  --accent-mid: #E0A876;
+  --accent-light: #FBEEDF;
+}
+.theme-violet {
+  --accent-deep: #6B5B95;
+  --accent-mid: #9C8AC4;
+  --accent-light: #EFEAFA;
+}
+.theme-blue {
+  --accent-deep: #3E6E8E;
+  --accent-mid: #7FAFC9;
+  --accent-light: #E6F2F7;
+}
+.theme-gold {
+  --accent-deep: #B8963E;
+  --accent-mid: #D9B871;
+  --accent-light: #F2E6C8;
+}
+.theme-rose {
+  --accent-deep: #B5707A;
+  --accent-mid: #D99FA8;
+  --accent-light: #F9E8EA;
+}
+.theme-teal {
+  --accent-deep: #3D7A6E;
+  --accent-mid: #6FA89B;
+  --accent-light: #E3F1EE;
 }
 
 [data-theme="dark"] {
@@ -41,6 +78,13 @@
   --green-light: #1A2E18;
   --gold-light: #2A2218;
 }
+
+[data-theme="dark"] .theme-orange { --accent-light: #2E2014; }
+[data-theme="dark"] .theme-violet { --accent-light: #211C2E; }
+[data-theme="dark"] .theme-blue { --accent-light: #16262E; }
+[data-theme="dark"] .theme-gold { --accent-light: #2A2218; }
+[data-theme="dark"] .theme-rose { --accent-light: #2A1C1F; }
+[data-theme="dark"] .theme-teal { --accent-light: #162823; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 

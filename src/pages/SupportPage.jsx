@@ -17,7 +17,7 @@ function AnnuaireCard({ item }) {
       <p style={{ fontSize: '0.85rem', color: 'var(--charcoal-mid)', lineHeight: '1.5', marginBottom: '0.75rem' }}>{item.description}</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
         {item.website && (
-          <a href={item.website} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--green-light)', color: 'var(--green-deep)', borderRadius: '20px', fontWeight: '500', textDecoration: 'none' }}>
+          <a href={item.website} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--accent-light)', color: 'var(--accent-deep)', borderRadius: '20px', fontWeight: '500', textDecoration: 'none' }}>
             🔗 Site web
           </a>
         )}
@@ -61,10 +61,10 @@ export default function SupportPage() {
   }, []);
 
   return (
-    <div className="page fade-in">
+    <div className="page fade-in theme-teal">
       <div className="page-header" style={{ marginBottom: '0' }}>
         <button onClick={() => navigate(-1)} style={{ color: 'var(--charcoal-light)', marginRight: '0.5rem' }}>←</button>
-        <h1 style={{ fontSize: '1.3rem', fontWeight: '600', color: 'var(--green-deep)' }}>Soutien et ressources</h1>
+        <h1 style={{ fontSize: '1.3rem', fontWeight: '600', color: 'var(--accent-deep)' }}>Soutien et ressources</h1>
       </div>
 
       <div style={{ padding: '1.25rem' }}>
@@ -82,14 +82,14 @@ export default function SupportPage() {
         </div>
 
         {/* Faith + therapy */}
-        <div className="card" style={{ marginBottom: '1.25rem', background: 'var(--green-light)', border: '1px solid rgba(75,124,89,0.2)' }}>
+        <div className="card" style={{ marginBottom: '1.25rem', background: 'var(--accent-light)', border: '1px solid rgba(75,124,89,0.2)' }}>
           <p style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>🤝</p>
-          <p style={{ fontWeight: '600', fontSize: '1rem', marginBottom: '0.5rem', color: 'var(--green-deep)' }}>La foi et le soin professionnel coexistent</p>
+          <p style={{ fontWeight: '600', fontSize: '1rem', marginBottom: '0.5rem', color: 'var(--accent-deep)' }}>La foi et le soin professionnel coexistent</p>
           <p style={{ fontSize: '0.85rem', color: 'var(--charcoal-mid)', lineHeight: '1.7' }}>
             L'Islam nous enseigne de prendre soin de notre corps et de notre âme. Consulter un professionnel de santé mentale n'est pas une faiblesse — c'est une forme de tawakkul (confiance en Allah) et de responsabilité envers soi-même.
           </p>
-          <p className="arabic" style={{ fontSize: '1rem', marginTop: '0.75rem', color: 'var(--green-deep)' }}>وَأَنَّ إِلَىٰ رَبِّكَ الْمُنتَهَىٰ</p>
-          <p style={{ fontSize: '0.75rem', color: 'var(--green-mid)', marginTop: '0.25rem' }}>Et qu'à ton Seigneur appartient la finalité — Coran 53:42</p>
+          <p className="arabic" style={{ fontSize: '1rem', marginTop: '0.75rem', color: 'var(--accent-deep)' }}>وَأَنَّ إِلَىٰ رَبِّكَ الْمُنتَهَىٰ</p>
+          <p style={{ fontSize: '0.75rem', color: 'var(--accent-mid)', marginTop: '0.25rem' }}>Et qu'à ton Seigneur appartient la finalité — Coran 53:42</p>
         </div>
 
         {/* Emergency numbers */}

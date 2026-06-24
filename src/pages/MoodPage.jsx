@@ -76,10 +76,10 @@ export default function MoodPage() {
   };
 
   return (
-    <div className="page fade-in">
+    <div className="page fade-in theme-orange">
       <div className="page-header">
         <div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--green-deep)' }}>Comment tu te sens ?</h1>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--accent-deep)' }}>Comment tu te sens ?</h1>
           <p style={{ color: 'var(--charcoal-light)', fontSize: '0.85rem' }}>
             {new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
           </p>
@@ -148,14 +148,14 @@ export default function MoodPage() {
                   type="range" min="1" max="5" step="1"
                   value={intensity}
                   onChange={e => setIntensity(Number(e.target.value))}
-                  style={{ width: '100%', marginBottom: '2rem', accentColor: 'var(--green-mid)' }}
+                  style={{ width: '100%', marginBottom: '2rem', accentColor: 'var(--accent-mid)' }}
                 />
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--charcoal-light)', marginTop: '-1.5rem', marginBottom: '2rem' }}>
                   <span>Peu intense</span><span>Très intense</span>
                 </div>
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                   <button onClick={() => setStep('select')} style={{ flex: 1, padding: '0.85rem', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', color: 'var(--charcoal-mid)' }}>Retour</button>
-                  <button onClick={() => setStep('triggers')} style={{ flex: 2, padding: '0.85rem', background: 'var(--green-deep)', color: 'white', borderRadius: 'var(--radius-md)', fontWeight: '600' }}>Continuer</button>
+                  <button onClick={() => setStep('triggers')} style={{ flex: 2, padding: '0.85rem', background: 'var(--accent-deep)', color: 'white', borderRadius: 'var(--radius-md)', fontWeight: '600' }}>Continuer</button>
                 </div>
               </div>
             )}
@@ -172,9 +172,9 @@ export default function MoodPage() {
                       style={{
                         padding: '0.5rem 0.9rem',
                         borderRadius: '20px',
-                        border: `1.5px solid ${selectedTriggers.includes(t.id) ? 'var(--green-mid)' : 'var(--border)'}`,
-                        background: selectedTriggers.includes(t.id) ? 'var(--green-light)' : 'var(--surface)',
-                        color: selectedTriggers.includes(t.id) ? 'var(--green-deep)' : 'var(--charcoal-mid)',
+                        border: `1.5px solid ${selectedTriggers.includes(t.id) ? 'var(--accent-mid)' : 'var(--border)'}`,
+                        background: selectedTriggers.includes(t.id) ? 'var(--accent-light)' : 'var(--surface)',
+                        color: selectedTriggers.includes(t.id) ? 'var(--accent-deep)' : 'var(--charcoal-mid)',
                         fontSize: '0.88rem',
                         fontWeight: selectedTriggers.includes(t.id) ? '500' : '400'
                       }}
@@ -192,7 +192,7 @@ export default function MoodPage() {
                 />
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                   <button onClick={() => setStep('intensity')} style={{ flex: 1, padding: '0.85rem', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', color: 'var(--charcoal-mid)' }}>Retour</button>
-                  <button onClick={handleSave} disabled={loading} style={{ flex: 2, padding: '0.85rem', background: 'var(--green-deep)', color: 'white', borderRadius: 'var(--radius-md)', fontWeight: '600', opacity: loading ? 0.7 : 1 }}>
+                  <button onClick={handleSave} disabled={loading} style={{ flex: 2, padding: '0.85rem', background: 'var(--accent-deep)', color: 'white', borderRadius: 'var(--radius-md)', fontWeight: '600', opacity: loading ? 0.7 : 1 }}>
                     {loading ? 'Enregistrement…' : 'Enregistrer'}
                   </button>
                 </div>
@@ -202,9 +202,9 @@ export default function MoodPage() {
             {step === 'done' && (
               <div className="fade-in" style={{ textAlign: 'center', padding: '2rem 0' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
-                <h2 style={{ fontSize: '1.3rem', fontWeight: '600', marginBottom: '0.5rem', color: 'var(--green-deep)' }}>Enregistré — الحَمدُ لِلَّه</h2>
+                <h2 style={{ fontSize: '1.3rem', fontWeight: '600', marginBottom: '0.5rem', color: 'var(--accent-deep)' }}>Enregistré — الحَمدُ لِلَّه</h2>
                 <p style={{ color: 'var(--charcoal-mid)', marginBottom: '2rem', fontSize: '0.9rem' }}>Prendre soin de toi est une forme d'ibadah.</p>
-                <button onClick={reset} style={{ padding: '0.85rem 2rem', background: 'var(--green-deep)', color: 'white', borderRadius: 'var(--radius-md)', fontWeight: '600' }}>
+                <button onClick={reset} style={{ padding: '0.85rem 2rem', background: 'var(--accent-deep)', color: 'white', borderRadius: 'var(--radius-md)', fontWeight: '600' }}>
                   Enregistrer une autre
                 </button>
               </div>
@@ -231,12 +231,12 @@ export default function MoodPage() {
                         {m.date?.toDate ? m.date.toDate().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : 'Aujourd\'hui'}
                       </p>
                       {m.triggers?.length > 0 && (
-                        <p style={{ fontSize: '0.75rem', color: 'var(--green-mid)', marginTop: '2px' }}>{m.triggers.join(' · ')}</p>
+                        <p style={{ fontSize: '0.75rem', color: 'var(--accent-mid)', marginTop: '2px' }}>{m.triggers.join(' · ')}</p>
                       )}
                     </div>
                     <div style={{ display: 'flex', gap: '2px' }}>
                       {[1,2,3,4,5].map(i => (
-                        <div key={i} style={{ width: '4px', height: `${i <= m.intensity ? 16 : 6}px`, background: i <= m.intensity ? 'var(--green-mid)' : 'var(--border)', borderRadius: '2px' }} />
+                        <div key={i} style={{ width: '4px', height: `${i <= m.intensity ? 16 : 6}px`, background: i <= m.intensity ? 'var(--accent-mid)' : 'var(--border)', borderRadius: '2px' }} />
                       ))}
                     </div>
                   </div>

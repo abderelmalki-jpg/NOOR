@@ -71,14 +71,14 @@ export default function JournalPage() {
   );
 
   return (
-    <div className="page fade-in">
+    <div className="page fade-in theme-violet">
       <div className="page-header" style={{ marginBottom: '0' }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--green-deep)' }}>Journal</h1>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--accent-deep)' }}>Journal</h1>
           <p style={{ color: 'var(--charcoal-light)', fontSize: '0.82rem' }}>Privé · chiffré · à toi</p>
         </div>
         {view === 'list' ? (
-          <button onClick={() => startEntry()} style={{ marginLeft: 'auto', background: 'var(--green-deep)', color: 'white', padding: '0.5rem 1rem', borderRadius: 'var(--radius-md)', fontWeight: '600', fontSize: '0.9rem' }}>
+          <button onClick={() => startEntry()} style={{ marginLeft: 'auto', background: 'var(--accent-deep)', color: 'white', padding: '0.5rem 1rem', borderRadius: 'var(--radius-md)', fontWeight: '600', fontSize: '0.9rem' }}>
             + Écrire
           </button>
         ) : (
@@ -145,7 +145,7 @@ export default function JournalPage() {
                     </p>
                     <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
                       {e.tags?.map(tag => (
-                        <span key={tag} style={{ fontSize: '0.7rem', padding: '2px 8px', background: 'var(--green-light)', color: 'var(--green-deep)', borderRadius: '20px', fontWeight: '500' }}>{tag}</span>
+                        <span key={tag} style={{ fontSize: '0.7rem', padding: '2px 8px', background: 'var(--accent-light)', color: 'var(--accent-deep)', borderRadius: '20px', fontWeight: '500' }}>{tag}</span>
                       ))}
                       <span style={{ marginLeft: 'auto', fontSize: '0.72rem', color: 'var(--charcoal-light)' }}>
                         {e.createdAt?.toDate ? e.createdAt.toDate().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }) : 'Aujourd\'hui'}
@@ -161,7 +161,7 @@ export default function JournalPage() {
         {view === 'write' && (
           <div className="fade-in">
             {selectedPrompt && (
-              <div style={{ background: 'var(--green-light)', border: '1px solid var(--green-soft)', borderRadius: 'var(--radius-sm)', padding: '0.75rem 1rem', marginBottom: '1rem', fontSize: '0.85rem', color: 'var(--green-deep)' }}>
+              <div style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-mid)', borderRadius: 'var(--radius-sm)', padding: '0.75rem 1rem', marginBottom: '1rem', fontSize: '0.85rem', color: 'var(--accent-deep)' }}>
                 {selectedPrompt.icon} {selectedPrompt.prompt}
               </div>
             )}
@@ -189,9 +189,9 @@ export default function JournalPage() {
                       padding: '4px 12px',
                       borderRadius: '20px',
                       fontSize: '0.78rem',
-                      border: `1.5px solid ${selectedTags.includes(tag) ? 'var(--green-mid)' : 'var(--border)'}`,
-                      background: selectedTags.includes(tag) ? 'var(--green-light)' : 'transparent',
-                      color: selectedTags.includes(tag) ? 'var(--green-deep)' : 'var(--charcoal-light)',
+                      border: `1.5px solid ${selectedTags.includes(tag) ? 'var(--accent-mid)' : 'var(--border)'}`,
+                      background: selectedTags.includes(tag) ? 'var(--accent-light)' : 'transparent',
+                      color: selectedTags.includes(tag) ? 'var(--accent-deep)' : 'var(--charcoal-light)',
                       fontWeight: selectedTags.includes(tag) ? '500' : '400'
                     }}
                   >
@@ -203,7 +203,7 @@ export default function JournalPage() {
             <button
               onClick={handleSave}
               disabled={!body.trim() || saving}
-              style={{ width: '100%', padding: '1rem', background: 'var(--green-deep)', color: 'white', borderRadius: 'var(--radius-md)', fontWeight: '600', opacity: (!body.trim() || saving) ? 0.6 : 1 }}
+              style={{ width: '100%', padding: '1rem', background: 'var(--accent-deep)', color: 'white', borderRadius: 'var(--radius-md)', fontWeight: '600', opacity: (!body.trim() || saving) ? 0.6 : 1 }}
             >
               {saving ? 'Enregistrement…' : 'Sauvegarder'}
             </button>
