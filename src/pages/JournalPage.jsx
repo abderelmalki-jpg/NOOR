@@ -108,7 +108,7 @@ export default function JournalPage() {
                     width: '140px'
                   }}
                 >
-                  <div style={{ fontSize: '1.4rem', marginBottom: '0.3rem' }}>{p.icon}</div>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--accent-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', marginBottom: '0.4rem' }}>{p.icon}</div>
                   <div style={{ fontWeight: '600', fontSize: '0.82rem', marginBottom: '0.2rem' }}>{p.label}</div>
                   <div style={{ fontSize: '0.72rem', color: 'var(--charcoal-light)', lineHeight: '1.4' }}>{p.prompt.substring(0, 45)}…</div>
                 </button>
