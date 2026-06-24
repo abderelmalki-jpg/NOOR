@@ -23,7 +23,7 @@ function ProtectedRoute({ children }) {
       <p style={{ color:'var(--charcoal-light)', fontSize:'0.9rem' }}>Chargement…</p>
     </div>
   </div>;
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) return <Navigate to={localStorage.getItem('nour_onboarding_seen') ? '/login' : '/onboarding'} replace />;
   return children;
 }
 
