@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { Capacitor } from '@capacitor/core';
-
-// signInWithPopup ne fonctionne pas dans la WebView native — masqué jusqu'à l'intégration d'un plugin Firebase Auth natif
-const showGoogleAuth = !Capacitor.isNativePlatform();
 
 function authErrorMessage(err) {
   switch (err?.code) {
@@ -91,14 +87,10 @@ export function LoginPage() {
         <button type="submit" disabled={loading} style={{ padding: '1rem', background: 'var(--green-deep)', color: 'white', borderRadius: 'var(--radius-md)', fontWeight: '600', fontSize: '1rem', opacity: loading ? 0.7 : 1 }}>
           {loading ? 'Connexion…' : 'Se connecter'}
         </button>
-        {showGoogleAuth && (
-          <>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: 'var(--charcoal-light)', fontSize: '0.8rem' }}>
-              <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} /> ou <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
-            </div>
-            <GoogleButton onClick={handleGoogle} disabled={loading} />
-          </>
-        )}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: 'var(--charcoal-light)', fontSize: '0.8rem' }}>
+          <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} /> ou <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
+        </div>
+        <GoogleButton onClick={handleGoogle} disabled={loading} />
       </form>
       <p style={{ textAlign: 'center', marginTop: '1.5rem', color: 'var(--charcoal-light)', fontSize: '0.9rem' }}>
         Pas encore de compte ?{' '}
@@ -159,14 +151,10 @@ export function RegisterPage() {
         <button type="submit" disabled={loading} style={{ padding: '1rem', background: 'var(--green-deep)', color: 'white', borderRadius: 'var(--radius-md)', fontWeight: '600', fontSize: '1rem', opacity: loading ? 0.7 : 1 }}>
           {loading ? 'Création…' : 'Créer mon compte'}
         </button>
-        {showGoogleAuth && (
-          <>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: 'var(--charcoal-light)', fontSize: '0.8rem' }}>
-              <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} /> ou <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
-            </div>
-            <GoogleButton onClick={handleGoogle} disabled={loading} />
-          </>
-        )}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: 'var(--charcoal-light)', fontSize: '0.8rem' }}>
+          <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} /> ou <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
+        </div>
+        <GoogleButton onClick={handleGoogle} disabled={loading} />
       </form>
       <p style={{ textAlign: 'center', marginTop: '1.5rem', color: 'var(--charcoal-light)', fontSize: '0.9rem' }}>
         Déjà un compte ?{' '}

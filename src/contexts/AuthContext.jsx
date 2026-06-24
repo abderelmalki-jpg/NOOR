@@ -5,11 +5,14 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signInWithPopup,
+  signInWithCredential,
   GoogleAuthProvider,
   signOut,
   updateProfile
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
+import { Capacitor } from '@capacitor/core';
+import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 
 const AuthContext = createContext(null);
 
@@ -56,15 +59,14 @@ export function AuthProvider({ children }) {
 
   const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
 
-  const loginWithGoogle = async () => {
-    const cred = await signInWithPopup(auth, new GoogleAuthProvider());
-    const profileRef = doc(db, 'users', cred.user.uid);
+  const syncGoogleProfile = async (firebaseUser) => {
+    const profileRef = doc(db, 'users', firebaseUser.uid);
     const snap = await getDoc(profileRef);
     if (!snap.exists()) {
       const profile = {
-        uid: cred.user.uid,
-        displayName: cred.user.displayName || '',
-        email: cred.user.email,
+        uid: firebaseUser.uid,
+        displayName: firebaseUser.displayName || '',
+        email: firebaseUser.email,
         createdAt: serverTimestamp(),
         goals: [],
         reminderTimes: [],
@@ -78,6 +80,20 @@ export function AuthProvider({ children }) {
     } else {
       setUserProfile(snap.data());
     }
+  };
+
+  const loginWithGoogle = async () => {
+    if (Capacitor.isNativePlatform()) {
+      // signInWithPopup doesn't work inside a WebView — use the native Google Sign-In flow,
+      // then hand its ID token to the Firebase JS SDK so the rest of the app keeps working unchanged.
+      const result = await FirebaseAuthentication.signInWithGoogle();
+      const credential = GoogleAuthProvider.credential(result.credential?.idToken);
+      const userCred = await signInWithCredential(auth, credential);
+      await syncGoogleProfile(userCred.user);
+      return userCred;
+    }
+    const cred = await signInWithPopup(auth, new GoogleAuthProvider());
+    await syncGoogleProfile(cred.user);
     return cred;
   };
 

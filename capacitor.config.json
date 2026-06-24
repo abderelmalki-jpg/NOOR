@@ -1,5 +1,11 @@
 {
   "appId": "com.nour.app",
   "appName": "Nour",
-  "webDir": "dist"
+  "webDir": "dist",
+  "plugins": {
+    "FirebaseAuthentication": {
+      "skipNativeAuth": false,
+      "providers": ["google.com"]
+    }
+  }
 }
