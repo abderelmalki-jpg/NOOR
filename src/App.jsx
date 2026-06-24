@@ -1,6 +1,8 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { useEffect, useState } from 'react';
+import { Capacitor } from '@capacitor/core';
+import { App as CapacitorApp } from '@capacitor/app';
 
 // Pages
 import OnboardingPage from './pages/OnboardingPage';
@@ -30,6 +32,8 @@ function ProtectedRoute({ children }) {
 function AppRoutes() {
   const { user, userProfile } = useAuth();
   const [theme, setTheme] = useState('light');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (userProfile?.theme) setTheme(userProfile.theme);
@@ -38,6 +42,19 @@ function AppRoutes() {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (!Capacitor.isNativePlatform()) return;
+    let handle;
+    CapacitorApp.addListener('backButton', () => {
+      if (location.pathname === '/' || location.pathname === '/login') {
+        CapacitorApp.exitApp();
+      } else {
+        navigate(-1);
+      }
+    }).then(h => { handle = h; });
+    return () => { handle?.remove(); };
+  }, [location, navigate]);
 
   return (
     <Routes>
