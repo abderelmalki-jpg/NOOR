@@ -21,7 +21,7 @@ export default function ProfilePage() {
 
   return (
     <div className="page fade-in theme-rose">
-      <div className="page-header page-header-hero" style={{ '--hero-image': "url('/art-reading-woman.png')" }}>
+      <div className="page-header page-header-hero" style={{ '--hero-image': "url('/art-writing-man.png')" }}>
         <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'white' }}>Profil & Paramètres</h1>
       </div>
 

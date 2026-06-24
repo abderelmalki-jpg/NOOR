@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 
 // Portrait onboarding art is shown full-bleed on phone screens — 900px wide is plenty for retina.
-const portraits = ['art-onboarding-cover.png', 'art-light-arch.png', 'art-reading-woman.png', 'art-arch-frame.png'];
+const portraits = ['art-onboarding-cover.png', 'art-light-arch.png', 'art-writing-man.png', 'art-arch-frame.png'];
 
 for (const f of portraits) {
   const path = 'public/' + f;

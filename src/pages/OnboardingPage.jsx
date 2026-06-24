@@ -12,7 +12,7 @@ const SLIDES = [
     body: 'Adhkâr, douas, les 40 Rabbana et les Hadiths de l\'imam An-Nawawi — un contenu authentique pour nourrir ton lien avec Allah à chaque instant.'
   },
   {
-    image: '/art-reading-woman.png',
+    image: '/art-writing-man.png',
     title: 'Prends soin de ton âme',
     body: 'Suis ton humeur au fil des jours et écris librement dans un journal privé, chiffré et à toi seul(e).'
   },

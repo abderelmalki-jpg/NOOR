@@ -72,7 +72,7 @@ export default function JournalPage() {
 
   return (
     <div className="page fade-in theme-violet">
-      <div className="page-header page-header-hero" style={{ marginBottom: '0', '--hero-image': "url('/art-reading-woman.png')" }}>
+      <div className="page-header page-header-hero" style={{ marginBottom: '0', '--hero-image': "url('/art-writing-man.png')" }}>
         <div>
           <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'white' }}>Journal</h1>
           <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.82rem' }}>Privé · chiffré · à toi</p>
