@@ -223,6 +223,7 @@ input:focus, textarea:focus, select:focus {
 .page {
   padding: 0 0 5rem;
   min-height: 100dvh;
+  background: var(--accent-light);
 }
 
 .page-header {
