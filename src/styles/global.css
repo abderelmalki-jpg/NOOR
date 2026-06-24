@@ -41,6 +41,8 @@
   --accent-deep: var(--green-deep);
   --accent-mid: var(--green-mid);
   --accent-light: var(--green-light);
+  --accent-deep-rgb: 45,80,22;
+  --accent-mid-rgb: 74,124,89;
 }
 
 /* Palette pastel apaisante par écran */
@@ -48,31 +50,43 @@
   --accent-deep: #C97B3D;
   --accent-mid: #E0A876;
   --accent-light: #FBEEDF;
+  --accent-deep-rgb: 201,123,61;
+  --accent-mid-rgb: 224,168,118;
 }
 .theme-violet {
   --accent-deep: #6B5B95;
   --accent-mid: #9C8AC4;
   --accent-light: #EFEAFA;
+  --accent-deep-rgb: 107,91,149;
+  --accent-mid-rgb: 156,138,196;
 }
 .theme-blue {
   --accent-deep: #3E6E8E;
   --accent-mid: #7FAFC9;
   --accent-light: #E6F2F7;
+  --accent-deep-rgb: 62,110,142;
+  --accent-mid-rgb: 127,175,201;
 }
 .theme-gold {
   --accent-deep: #B8963E;
   --accent-mid: #D9B871;
   --accent-light: #F2E6C8;
+  --accent-deep-rgb: 184,150,62;
+  --accent-mid-rgb: 217,184,113;
 }
 .theme-rose {
   --accent-deep: #B5707A;
   --accent-mid: #D99FA8;
   --accent-light: #F9E8EA;
+  --accent-deep-rgb: 181,112,122;
+  --accent-mid-rgb: 217,159,168;
 }
 .theme-teal {
   --accent-deep: #3D7A6E;
   --accent-mid: #6FA89B;
   --accent-light: #E3F1EE;
+  --accent-deep-rgb: 61,122,110;
+  --accent-mid-rgb: 111,168,155;
 }
 
 [data-theme="dark"] {
@@ -234,6 +248,16 @@ input:focus, textarea:focus, select:focus {
   background: var(--accent-light);
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   margin-bottom: 1rem;
+}
+
+/* Bandeau "hero" : dégradé teinté de la page superposé à une image, en plus léger derrière le titre */
+.page-header-hero {
+  padding-top: 2rem;
+  padding-bottom: 1.75rem;
+  background-image: linear-gradient(180deg, rgba(var(--accent-deep-rgb), 0.88) 0%, rgba(var(--accent-mid-rgb), 0.85) 100%), var(--hero-image);
+  background-size: cover;
+  background-position: center;
+  color: white;
 }
 
 .section-title {

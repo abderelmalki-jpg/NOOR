@@ -127,10 +127,10 @@ export default function ContentPage() {
 
   return (
     <div className="page fade-in theme-gold">
-      <div className="page-header">
+      <div className="page-header page-header-hero" style={{ '--hero-image': "url('/art-arch-frame.png')" }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--accent-deep)' }}>Contenu islamique</h1>
-          <p style={{ color: 'var(--charcoal-light)', fontSize: '0.82rem' }}>Adhkâr · Douas · Rabbana · Hadiths · Réflexions</p>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'white' }}>Contenu islamique</h1>
+          <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.82rem' }}>Adhkâr · Douas · Rabbana · Hadiths · Réflexions</p>
         </div>
       </div>
 

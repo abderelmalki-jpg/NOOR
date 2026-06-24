@@ -75,10 +75,10 @@ export default function BreathingPage() {
 
   return (
     <div className="page fade-in theme-blue">
-      <div className="page-header">
+      <div className="page-header page-header-hero" style={{ '--hero-image': "url('/art-onboarding-cover.png')" }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--accent-deep)' }}>Respiration & Calme</h1>
-          <p style={{ color: 'var(--charcoal-light)', fontSize: '0.82rem' }}>Exerce-toi à la présence — الحضور</p>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'white' }}>Respiration & Calme</h1>
+          <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.82rem' }}>Exerce-toi à la présence — الحضور</p>
         </div>
       </div>
 

@@ -77,16 +77,16 @@ export default function MoodPage() {
 
   return (
     <div className="page fade-in theme-orange">
-      <div className="page-header">
+      <div className="page-header page-header-hero" style={{ '--hero-image': "url('/art-light-arch.png')" }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--accent-deep)' }}>Comment tu te sens ?</h1>
-          <p style={{ color: 'var(--charcoal-light)', fontSize: '0.85rem' }}>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'white' }}>Comment tu te sens ?</h1>
+          <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>
             {new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
           </p>
         </div>
         <button
           onClick={() => setShowHistory(!showHistory)}
-          style={{ marginLeft: 'auto', color: 'var(--charcoal-light)', fontSize: '0.8rem', padding: '0.4rem 0.75rem', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', background: 'var(--surface)' }}
+          style={{ marginLeft: 'auto', color: 'var(--accent-deep)', fontSize: '0.8rem', padding: '0.4rem 0.75rem', border: 'none', borderRadius: 'var(--radius-sm)', background: 'white' }}
         >
           {showHistory ? 'Enregistrer' : 'Historique'}
         </button>

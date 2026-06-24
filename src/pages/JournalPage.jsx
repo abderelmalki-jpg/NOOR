@@ -72,17 +72,17 @@ export default function JournalPage() {
 
   return (
     <div className="page fade-in theme-violet">
-      <div className="page-header" style={{ marginBottom: '0' }}>
+      <div className="page-header page-header-hero" style={{ marginBottom: '0', '--hero-image': "url('/art-reading-woman.png')" }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--accent-deep)' }}>Journal</h1>
-          <p style={{ color: 'var(--charcoal-light)', fontSize: '0.82rem' }}>Privé · chiffré · à toi</p>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'white' }}>Journal</h1>
+          <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.82rem' }}>Privé · chiffré · à toi</p>
         </div>
         {view === 'list' ? (
-          <button onClick={() => startEntry()} style={{ marginLeft: 'auto', background: 'var(--accent-deep)', color: 'white', padding: '0.5rem 1rem', borderRadius: 'var(--radius-md)', fontWeight: '600', fontSize: '0.9rem' }}>
+          <button onClick={() => startEntry()} style={{ marginLeft: 'auto', background: 'white', color: 'var(--accent-deep)', padding: '0.5rem 1rem', borderRadius: 'var(--radius-md)', fontWeight: '600', fontSize: '0.9rem' }}>
             + Écrire
           </button>
         ) : (
-          <button onClick={() => setView('list')} style={{ marginLeft: 'auto', color: 'var(--charcoal-light)', fontSize: '0.9rem', padding: '0.5rem' }}>
+          <button onClick={() => setView('list')} style={{ marginLeft: 'auto', color: 'white', opacity: 0.85, fontSize: '0.9rem', padding: '0.5rem' }}>
             Annuler
           </button>
         )}

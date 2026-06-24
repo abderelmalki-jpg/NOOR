@@ -62,9 +62,9 @@ export default function SupportPage() {
 
   return (
     <div className="page fade-in theme-teal">
-      <div className="page-header" style={{ marginBottom: '0' }}>
-        <button onClick={() => navigate(-1)} style={{ color: 'var(--charcoal-light)', marginRight: '0.5rem' }}>←</button>
-        <h1 style={{ fontSize: '1.3rem', fontWeight: '600', color: 'var(--accent-deep)' }}>Soutien et ressources</h1>
+      <div className="page-header page-header-hero" style={{ marginBottom: '0', '--hero-image': "url('/art-light-arch.png')" }}>
+        <button onClick={() => navigate(-1)} style={{ color: 'white', marginRight: '0.5rem' }}>←</button>
+        <h1 style={{ fontSize: '1.3rem', fontWeight: '600', color: 'white' }}>Soutien et ressources</h1>
       </div>
 
       <div style={{ padding: '1.25rem' }}>
