@@ -36,8 +36,7 @@ function AuthLayout({ children, title }) {
   return (
     <div style={{ minHeight: '100dvh', background: 'var(--beige)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '2rem 1.5rem' }}>
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>☽</div>
-        <h1 style={{ fontSize: '1.6rem', fontWeight: '600', color: 'var(--green-deep)' }}>Nour</h1>
+        <img src="/logo-nour.png" alt="Nour" style={{ width: '160px', marginBottom: '0.25rem' }} />
         <p style={{ color: 'var(--charcoal-light)', fontSize: '0.85rem', marginTop: '0.25rem' }}>{title}</p>
       </div>
       {children}
