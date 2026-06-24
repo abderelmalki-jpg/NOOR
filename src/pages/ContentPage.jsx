@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const TABS = ['Adhkâr', 'Douas', 'Rabbana', 'Hadiths', 'Réflexions', 'Coran'];
+const TABS = ['Adhkâr', 'Douas', 'Rabbana', 'Jawami', 'Hadiths', 'Réflexions', 'Coran'];
 
 const SURAHS = [
   { number: 112, name: 'Al-Ikhlâs', frenchName: 'Le monothéisme pur' },
@@ -160,22 +160,25 @@ export default function ContentPage() {
   const [reflections, setReflections] = useState([]);
   const [rabbana, setRabbana] = useState([]);
   const [nawawi, setNawawi] = useState([]);
+  const [jawami, setJawami] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchContent = async () => {
-      const [duasSnap, adhkarSnap, reflectionsSnap, rabbanaSnap, nawawiSnap] = await Promise.all([
+      const [duasSnap, adhkarSnap, reflectionsSnap, rabbanaSnap, nawawiSnap, jawamiSnap] = await Promise.all([
         getDocs(collection(db, 'content_duas')),
         getDocs(collection(db, 'content_adhkar')),
         getDocs(collection(db, 'content_reflections')),
         getDocs(collection(db, 'content_rabbana')),
-        getDocs(collection(db, 'content_nawawi'))
+        getDocs(collection(db, 'content_nawawi')),
+        getDocs(collection(db, 'content_jawami'))
       ]);
       setDuas(duasSnap.docs.map(d => d.data()));
       setAdhkar(adhkarSnap.docs.map(d => d.data()));
       setReflections(reflectionsSnap.docs.map(d => d.data()));
       setRabbana(rabbanaSnap.docs.map(d => d.data()).sort((a, b) => a.id.localeCompare(b.id)));
       setNawawi(nawawiSnap.docs.map(d => d.data()).sort((a, b) => a.id.localeCompare(b.id)));
+      setJawami(jawamiSnap.docs.map(d => d.data()).sort((a, b) => a.id.localeCompare(b.id)));
       setLoading(false);
     };
     fetchContent();
@@ -276,19 +279,28 @@ export default function ContentPage() {
         {tab === 3 && (
           <div className="fade-in">
             <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', marginBottom: '1rem' }}>
+              Les invocations complètes (jawâmi') du Prophète ﷺ
+            </p>
+            {jawami.map(item => <ArabicCard key={item.id} item={item} />)}
+          </div>
+        )}
+
+        {tab === 4 && (
+          <div className="fade-in">
+            <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', marginBottom: '1rem' }}>
               Les 40 Hadiths de l'imam An-Nawawi (Al-Arba'ûn an-Nawawiyya)
             </p>
             {nawawi.map(item => <ArabicCard key={item.id} item={item} />)}
           </div>
         )}
 
-        {tab === 4 && (
+        {tab === 5 && (
           <div className="fade-in">
             {reflections.map(item => <ReflectionCard key={item.id} item={item} />)}
           </div>
         )}
 
-        {tab === 5 && <QuranTab />}
+        {tab === 6 && <QuranTab />}
       </div>
     </div>
   );
