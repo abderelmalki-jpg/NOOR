@@ -1,4 +1,45 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
+
+const ANNUAIRE_CATEGORIES = {
+  psychologue: { label: 'Psychologues & thérapeutes musulmans', icon: '🧠' },
+  institution: { label: 'Institutions & savants reconnus', icon: '🕌' },
+  mufti: { label: 'Autorités religieuses officielles', icon: '📜' }
+};
+
+function AnnuaireCard({ item }) {
+  return (
+    <div className="card" style={{ marginBottom: '0.75rem' }}>
+      <p style={{ fontWeight: '600', fontSize: '0.9rem', marginBottom: '0.15rem' }}>{item.name}</p>
+      <p style={{ fontSize: '0.78rem', color: 'var(--charcoal-light)', marginBottom: '0.5rem' }}>{item.country}</p>
+      <p style={{ fontSize: '0.85rem', color: 'var(--charcoal-mid)', lineHeight: '1.5', marginBottom: '0.75rem' }}>{item.description}</p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+        {item.website && (
+          <a href={item.website} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--green-light)', color: 'var(--green-deep)', borderRadius: '20px', fontWeight: '500', textDecoration: 'none' }}>
+            🔗 Site web
+          </a>
+        )}
+        {item.phone && (
+          <a href={`tel:${item.phone}`} style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--charcoal)', borderRadius: '20px', fontWeight: '500', textDecoration: 'none' }}>
+            📞 {item.phone}
+          </a>
+        )}
+        {item.whatsapp && (
+          <a href={`https://wa.me/${item.whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--charcoal)', borderRadius: '20px', fontWeight: '500', textDecoration: 'none' }}>
+            💬 WhatsApp
+          </a>
+        )}
+        {item.email && (
+          <a href={`mailto:${item.email}`} style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--charcoal)', borderRadius: '20px', fontWeight: '500', textDecoration: 'none' }}>
+            ✉️ Email
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
 
 const EMERGENCY_NUMBERS = [
   { country: '🇲🇦 Maroc', numbers: [{ label: 'Urgences psychologiques', number: '141' }, { label: 'SAMU Social', number: '080 060 0909' }] },
@@ -9,6 +50,15 @@ const EMERGENCY_NUMBERS = [
 
 export default function SupportPage() {
   const navigate = useNavigate();
+  const [annuaire, setAnnuaire] = useState([]);
+
+  useEffect(() => {
+    const fetchAnnuaire = async () => {
+      const snap = await getDocs(collection(db, 'content_annuaire'));
+      setAnnuaire(snap.docs.map(d => d.data()));
+    };
+    fetchAnnuaire();
+  }, []);
 
   return (
     <div className="page fade-in">
@@ -56,14 +106,21 @@ export default function SupportPage() {
           </div>
         ))}
 
-        {/* Therapist directory placeholder */}
-        <div className="card" style={{ marginTop: '0.5rem', border: '1px dashed var(--border)' }}>
-          <p style={{ fontSize: '0.85rem', color: 'var(--charcoal-light)', marginBottom: '0.5rem' }}>🔜 Annuaire de thérapeutes</p>
-          <p style={{ fontSize: '0.8rem', color: 'var(--charcoal-light)' }}>
-            {/* TODO: Intégrer un annuaire de thérapeutes sensibles aux valeurs islamiques */}
-            Bientôt disponible — nous travaillons à constituer un annuaire de professionnels de santé mentale sensibles à la culture et aux valeurs musulmanes.
-          </p>
+        {/* Annuaire */}
+        <p className="section-title">Annuaire</p>
+        <div className="disclaimer" style={{ marginBottom: '1rem' }}>
+          📋 Organismes publics indépendants, non affiliés à Nour. Vérifie toujours les qualifications avant de prendre rendez-vous.
         </div>
+        {Object.entries(ANNUAIRE_CATEGORIES).map(([cat, { label, icon }]) => {
+          const items = annuaire.filter(a => a.category === cat);
+          if (!items.length) return null;
+          return (
+            <div key={cat} style={{ marginBottom: '1.25rem' }}>
+              <p style={{ fontWeight: '600', fontSize: '0.85rem', color: 'var(--charcoal-mid)', marginBottom: '0.6rem' }}>{icon} {label}</p>
+              {items.map(item => <AnnuaireCard key={item.id} item={item} />)}
+            </div>
+          );
+        })}
 
         {/* Privacy */}
         <div className="card" style={{ marginTop: '1rem' }}>

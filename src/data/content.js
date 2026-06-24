@@ -333,3 +333,72 @@ export const TRIGGERS = [
   { id: "fatigue", label: "Fatigue" },
   { id: "relations", label: "Relations" }
 ];
+
+// Annuaire : organismes et institutions francophones publics et vérifiables.
+// Il ne s'agit pas de contacts personnels inventés — uniquement des structures dont l'existence
+// et les coordonnées sont publiques. Vérifie toujours les qualifications avant de prendre rendez-vous.
+export const ANNUAIRE = [
+  {
+    id: "annuaire_mapsymusulmane",
+    category: "psychologue",
+    name: "MaPsyMusulmane",
+    description: "Premier annuaire francophone de psychologues musulmanes. Consultations individuelles (anxiété, dépression, burn-out, conflits familiaux, traumatismes) et cercles de soutien gratuits.",
+    country: "🇫🇷 France (en ligne)",
+    website: "https://mapsymusulmane.com",
+    whatsapp: "+33780986781"
+  },
+  {
+    id: "annuaire_islam_psychologie",
+    category: "psychologue",
+    name: "Islam & Psychologie — Annuaire Psy",
+    description: "Annuaire de professionnels de santé mentale validés par la plateforme, alliant rigueur clinique et compréhension des valeurs islamiques.",
+    country: "🇫🇷 France (en ligne)",
+    website: "https://www.islam-psychologie.com/Annuaire-Psy"
+  },
+  {
+    id: "annuaire_hayat",
+    category: "psychologue",
+    name: "Association Hayat",
+    description: "Consultations gratuites de thérapie et d'accompagnement psychologique dans une approche islamique.",
+    country: "🇫🇷 France (en ligne)",
+    website: "https://www.assohayat.com",
+    email: "contact@assohayat.com"
+  },
+  {
+    id: "annuaire_cfcm",
+    category: "institution",
+    name: "Conseil Français du Culte Musulman (CFCM)",
+    description: "Instance représentative du culte musulman auprès des autorités françaises pour les questions religieuses.",
+    country: "🇫🇷 France",
+    website: "https://cfcm-officiel.fr"
+  },
+  {
+    id: "annuaire_grande_mosquee_paris",
+    category: "institution",
+    name: "Grande Mosquée de Paris",
+    description: "Institution religieuse historique, interlocuteur traditionnel des pouvoirs publics français sur les questions de culte musulman.",
+    country: "🇫🇷 France",
+    website: "https://www.grandemosqueedeparis.fr/contact",
+    phone: "+33145359733",
+    email: "contact@grandemosqueedeparis.fr"
+  },
+  {
+    id: "annuaire_mufti_tunisie",
+    category: "mufti",
+    name: "Mufti de la République tunisienne (Diwan Al Ifta)",
+    description: "Plus haute autorité religieuse officielle de Tunisie, rattachée à la Présidence du gouvernement.",
+    country: "🇹🇳 Tunisie",
+    website: "https://diwanalifta.pm.gov.tn/fr/organisation-mufti"
+  },
+  {
+    id: "annuaire_oulemas_maroc",
+    category: "mufti",
+    name: "Conseil Supérieur des Oulémas du Maroc",
+    description: "Instance officielle de référence religieuse du Royaume du Maroc, présidée par le Roi Mohammed VI.",
+    country: "🇲🇦 Maroc",
+    website: "https://www.habous.gov.ma/fr/conseil-sup%C3%A9rieur-des-oul%C3%A9mas/531-conseil-sup%C3%A9rieur-des-oul%C3%A9mas-2"
+  }
+];
+
+// Note : la France, pays laïc, n'a pas de "Grand Mufti" officiellement reconnu par l'État.
+// Le CFCM et la Grande Mosquée de Paris en sont les interlocuteurs institutionnels les plus proches.
