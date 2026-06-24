@@ -2,7 +2,74 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const TABS = ['Adhkâr', 'Douas', 'Rabbana', 'Hadiths', 'Réflexions'];
+const TABS = ['Adhkâr', 'Douas', 'Rabbana', 'Hadiths', 'Réflexions', 'Coran'];
+
+const SURAHS = [
+  { number: 112, name: 'Al-Ikhlâs', frenchName: 'Le monothéisme pur' },
+  { number: 113, name: 'Al-Falaq', frenchName: "L'aube naissante" },
+  { number: 114, name: 'An-Nâs', frenchName: 'Les hommes' },
+  { number: 2, name: 'Al-Baqara', frenchName: 'La vache' }
+];
+
+function SurahPlayer({ surah, onBack }) {
+  const [ayahs, setAyahs] = useState(null);
+
+  useEffect(() => {
+    setAyahs(null);
+    fetch(`https://api.alquran.cloud/v1/surah/${surah.number}/quran-uthmani`)
+      .then(r => r.json())
+      .then(j => setAyahs(j.data.ayahs))
+      .catch(() => setAyahs([]));
+  }, [surah.number]);
+
+  return (
+    <div className="fade-in">
+      <button onClick={onBack} style={{ color: 'var(--accent-mid)', fontSize: '0.85rem', marginBottom: '1rem' }}>← Retour aux sourates</button>
+      <div className="card" style={{ marginBottom: '1rem' }}>
+        <p style={{ fontWeight: '600', fontSize: '1rem', marginBottom: '0.2rem' }}>{surah.name} — {surah.frenchName}</p>
+        <p style={{ fontSize: '0.78rem', color: 'var(--charcoal-light)', marginBottom: '0.75rem' }}>Récité par Mishary Rashid Al-Afasy</p>
+        <audio controls style={{ width: '100%' }} src={`https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${surah.number}.mp3`} />
+      </div>
+      {ayahs === null ? (
+        <p style={{ textAlign: 'center', color: 'var(--charcoal-light)', padding: '2rem 0' }}>Chargement du texte…</p>
+      ) : (
+        <div className="card">
+          {ayahs.map(a => (
+            <p key={a.number} className="arabic" style={{ fontSize: '1.3rem', lineHeight: '2.4', marginBottom: '0.5rem' }}>
+              {a.text} <span style={{ fontSize: '0.7rem', color: 'var(--accent-mid)' }}>({a.numberInSurah})</span>
+            </p>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function QuranTab() {
+  const [selected, setSelected] = useState(null);
+  if (selected) return <SurahPlayer surah={selected} onBack={() => setSelected(null)} />;
+  return (
+    <div className="fade-in">
+      <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', marginBottom: '1rem' }}>
+        Récitation de Mishary Rashid Al-Afasy
+      </p>
+      {SURAHS.map(s => (
+        <button
+          key={s.number}
+          onClick={() => setSelected(s)}
+          className="card"
+          style={{ width: '100%', textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}
+        >
+          <div>
+            <p style={{ fontWeight: '600', fontSize: '0.95rem' }}>{s.name}</p>
+            <p style={{ fontSize: '0.78rem', color: 'var(--charcoal-light)' }}>{s.frenchName}</p>
+          </div>
+          <span style={{ color: 'var(--accent-mid)' }}>▶</span>
+        </button>
+      ))}
+    </div>
+  );
+}
 
 function ArabicCard({ item }) {
   const [expanded, setExpanded] = useState(false);
@@ -135,18 +202,19 @@ export default function ContentPage() {
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', padding: '0 1.25rem', gap: '0', borderBottom: '1px solid var(--border)', marginBottom: '0' }}>
+      <div style={{ display: 'flex', padding: '0 1.25rem', gap: '1.25rem', overflowX: 'auto', borderBottom: '1px solid var(--border)', marginBottom: '0' }}>
         {TABS.map((t, i) => (
           <button
             key={t}
             onClick={() => setTab(i)}
             style={{
-              flex: 1,
+              flexShrink: 0,
               padding: '0.75rem 0',
               fontWeight: tab === i ? '600' : '400',
               color: tab === i ? 'var(--accent-deep)' : 'var(--charcoal-light)',
               borderBottom: tab === i ? '2px solid var(--accent-deep)' : '2px solid transparent',
               fontSize: '0.88rem',
+              whiteSpace: 'nowrap',
               transition: 'all 0.2s'
             }}
           >
@@ -219,6 +287,8 @@ export default function ContentPage() {
             {reflections.map(item => <ReflectionCard key={item.id} item={item} />)}
           </div>
         )}
+
+        {tab === 5 && <QuranTab />}
       </div>
     </div>
   );
