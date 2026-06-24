@@ -16,6 +16,7 @@ const SHORTCUT_CARDS = [
   { emoji: '🌧', label: 'Je me sens triste', path: '/content', color: '#EDE8F8', borderColor: '#9B8EC4' },
   { emoji: '🌙', label: "Je n'arrive pas à dormir", path: '/breathing', color: '#F0EAD8', borderColor: '#B8963E' },
   { emoji: '✨', label: "J'ai besoin d'un rappel", path: '/content', color: '#E8F0E4', borderColor: '#4A7C59' },
+  { emoji: '📖', label: 'Écouter le Coran', path: '/content', state: { tab: 'Coran' }, color: '#F0EAD8', borderColor: '#B8963E' },
 ];
 
 function getGreeting(name) {
@@ -29,6 +30,26 @@ function getGreeting(name) {
 function getDayOfWeek() {
   const days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
   return days[new Date().getDay()];
+}
+
+function weekDayLogs(logs) {
+  const dayLetters = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+  const days = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    d.setHours(0, 0, 0, 0);
+    const dayLog = logs.find(l => {
+      const logDate = l.date?.toDate ? l.date.toDate() : new Date(l.date);
+      return logDate.toDateString() === d.toDateString();
+    });
+    days.push({
+      day: dayLetters[d.getDay()],
+      mood: dayLog?.mood ?? null,
+      intensity: dayLog?.intensity ?? null
+    });
+  }
+  return days;
 }
 
 export default function HomePage() {
@@ -67,6 +88,27 @@ export default function HomePage() {
       }
     };
     fetchMoods();
+  }, [user]);
+
+  useEffect(() => {
+    if (!user) return;
+    const weekStart = new Date();
+    weekStart.setDate(weekStart.getDate() - 6);
+    weekStart.setHours(0,0,0,0);
+    const fetchWeekMoods = async () => {
+      try {
+        const q = query(
+          collection(db, 'users', user.uid, 'mood_logs'),
+          where('date', '>=', weekStart),
+          orderBy('date', 'desc')
+        );
+        const snap = await getDocs(q);
+        setWeekMoods(snap.docs.map(d => d.data()));
+      } catch (e) {
+        // Firestore index may not be ready — ignore silently
+      }
+    };
+    fetchWeekMoods();
   }, [user]);
 
   const isFriday = new Date().getDay() === 5;
@@ -152,7 +194,7 @@ export default function HomePage() {
           {SHORTCUT_CARDS.map((c, i) => (
             <button
               key={i}
-              onClick={() => navigate(c.path)}
+              onClick={() => navigate(c.path, c.state ? { state: c.state } : undefined)}
               style={{
                 background: c.color,
                 border: `1px solid ${c.borderColor}30`,
@@ -173,9 +215,8 @@ export default function HomePage() {
         {/* This week summary */}
         <p className="section-title">Cette semaine</p>
         <div className="card" style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-end', marginBottom: '1.25rem' }}>
-          {['L','M','M','J','V','S','D'].map((day, i) => {
-            const height = [40, 60, 35, 70, 50, 0, 0][i];
-            const mood = [3, 4, 2, 4, 3, null, null][i];
+          {weekDayLogs(weekMoods).map(({ day, mood, intensity }, i) => {
+            const height = intensity ? 16 + intensity * 12 : 0;
             return (
               <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
                 <div style={{

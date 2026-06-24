@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
@@ -153,7 +154,8 @@ function ReflectionCard({ item }) {
 }
 
 export default function ContentPage() {
-  const [tab, setTab] = useState(0);
+  const location = useLocation();
+  const [tab, setTab] = useState(() => TABS.indexOf(location.state?.tab) !== -1 ? TABS.indexOf(location.state?.tab) : 0);
   const [duaFilter, setDuaFilter] = useState('all');
   const [duas, setDuas] = useState([]);
   const [adhkar, setAdhkar] = useState([]);
