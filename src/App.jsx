@@ -3,6 +3,8 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { Capacitor } from '@capacitor/core';
 import { App as CapacitorApp } from '@capacitor/app';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from './firebase';
 
 // Pages
 import OnboardingPage from './pages/OnboardingPage';
@@ -44,6 +46,10 @@ function AppRoutes() {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (analytics) logEvent(analytics, 'page_view', { page_path: location.pathname });
+  }, [location.pathname]);
 
   useEffect(() => {
     if (!Capacitor.isNativePlatform()) return;
