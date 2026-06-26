@@ -5,14 +5,19 @@ import { db } from '../firebase';
 
 const TABS = ['Adhkâr', 'Douas', 'Rabbana', 'Jawami', 'Hadiths', 'Réflexions', 'Coran'];
 
-const SURAHS = [
-  { number: 112, name: 'Al-Ikhlâs', frenchName: 'Le monothéisme pur' },
-  { number: 113, name: 'Al-Falaq', frenchName: "L'aube naissante" },
-  { number: 114, name: 'An-Nâs', frenchName: 'Les hommes' },
-  { number: 2, name: 'Al-Baqara', frenchName: 'La vache' }
+const RECITERS = [
+  { id: 'ali_jaber', name: 'Cheikh Ali Jaber', base: 'https://server11.mp3quran.net/a_jbr/' },
+  { id: 'alafasy', name: 'Mishary Rashid Al-Afasy', base: 'https://server8.mp3quran.net/afs/' },
+  { id: 'sudais', name: 'Abdurrahman As-Sudais', base: 'https://server11.mp3quran.net/sds/' },
+  { id: 'husary', name: 'Mahmoud Khalil Al-Husary', base: 'https://server13.mp3quran.net/husr/' },
+  { id: 'maher', name: 'Maher Al Muaiqly', base: 'https://server12.mp3quran.net/maher/' }
 ];
 
-function SurahPlayer({ surah, onBack }) {
+function surahAudioUrl(reciter, number) {
+  return `${reciter.base}${String(number).padStart(3, '0')}.mp3`;
+}
+
+function SurahPlayer({ surah, reciter, onBack }) {
   const [ayahs, setAyahs] = useState(null);
 
   useEffect(() => {
@@ -27,9 +32,9 @@ function SurahPlayer({ surah, onBack }) {
     <div className="fade-in">
       <button onClick={onBack} style={{ color: 'var(--accent-mid)', fontSize: '0.85rem', marginBottom: '1rem' }}>← Retour aux sourates</button>
       <div className="card" style={{ marginBottom: '1rem' }}>
-        <p style={{ fontWeight: '600', fontSize: '1rem', marginBottom: '0.2rem' }}>{surah.name} — {surah.frenchName}</p>
-        <p style={{ fontSize: '0.78rem', color: 'var(--charcoal-light)', marginBottom: '0.75rem' }}>Récité par Mishary Rashid Al-Afasy</p>
-        <audio controls style={{ width: '100%' }} src={`https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${surah.number}.mp3`} />
+        <p style={{ fontWeight: '600', fontSize: '1rem', marginBottom: '0.2rem' }}>{surah.name} — {surah.englishNameTranslation}</p>
+        <p style={{ fontSize: '0.78rem', color: 'var(--charcoal-light)', marginBottom: '0.75rem' }}>Récité par {reciter.name}</p>
+        <audio controls style={{ width: '100%' }} src={surahAudioUrl(reciter, surah.number)} />
       </div>
       {ayahs === null ? (
         <p style={{ textAlign: 'center', color: 'var(--charcoal-light)', padding: '2rem 0' }}>Chargement du texte…</p>
@@ -48,26 +53,51 @@ function SurahPlayer({ surah, onBack }) {
 
 function QuranTab() {
   const [selected, setSelected] = useState(null);
-  if (selected) return <SurahPlayer surah={selected} onBack={() => setSelected(null)} />;
+  const [surahs, setSurahs] = useState(null);
+  const [reciter, setReciter] = useState(RECITERS[0]);
+
+  useEffect(() => {
+    fetch('https://api.alquran.cloud/v1/surah')
+      .then(r => r.json())
+      .then(j => setSurahs(j.data))
+      .catch(() => setSurahs([]));
+  }, []);
+
+  if (selected) return <SurahPlayer surah={selected} reciter={reciter} onBack={() => setSelected(null)} />;
+
   return (
     <div className="fade-in">
-      <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', marginBottom: '1rem' }}>
-        Récitation de Mishary Rashid Al-Afasy
+      <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
+        Le Coran complet (114 sourates)
       </p>
-      {SURAHS.map(s => (
-        <button
-          key={s.number}
-          onClick={() => setSelected(s)}
-          className="card"
-          style={{ width: '100%', textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}
-        >
-          <div>
-            <p style={{ fontWeight: '600', fontSize: '0.95rem' }}>{s.name}</p>
-            <p style={{ fontSize: '0.78rem', color: 'var(--charcoal-light)' }}>{s.frenchName}</p>
-          </div>
-          <span style={{ color: 'var(--accent-mid)' }}>▶</span>
-        </button>
-      ))}
+      <select
+        value={reciter.id}
+        onChange={e => setReciter(RECITERS.find(r => r.id === e.target.value))}
+        style={{ width: '100%', padding: '0.6rem 0.75rem', marginBottom: '1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--charcoal)', fontSize: '0.88rem' }}
+      >
+        {RECITERS.map(r => <option key={r.id} value={r.id}>{r.name}</option>)}
+      </select>
+      {surahs === null ? (
+        <p style={{ textAlign: 'center', color: 'var(--charcoal-light)', padding: '2rem 0' }}>Chargement des sourates…</p>
+      ) : (
+        surahs.map(s => (
+          <button
+            key={s.number}
+            onClick={() => setSelected(s)}
+            className="card"
+            style={{ width: '100%', textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--accent-mid)', width: '1.5rem', flexShrink: 0 }}>{s.number}</span>
+              <div>
+                <p style={{ fontWeight: '600', fontSize: '0.95rem' }}>{s.englishName}</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--charcoal-light)' }}>{s.englishNameTranslation} · {s.numberOfAyahs} versets</p>
+              </div>
+            </div>
+            <span style={{ color: 'var(--accent-mid)' }}>▶</span>
+          </button>
+        ))
+      )}
     </div>
   );
 }
