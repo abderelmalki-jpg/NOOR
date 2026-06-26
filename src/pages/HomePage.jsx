@@ -32,6 +32,33 @@ function getDayOfWeek() {
   return days[new Date().getDay()];
 }
 
+const PRAYER_NAMES = {
+  Fajr: 'Fajr',
+  Dhuhr: 'Dhouhr',
+  Asr: 'Asr',
+  Maghrib: 'Maghrib',
+  Isha: 'Isha'
+};
+
+function parsePrayerTime(hhmm) {
+  const [h, m] = hhmm.split(':').map(Number);
+  const d = new Date();
+  d.setHours(h, m, 0, 0);
+  return d;
+}
+
+function getNextPrayer(timings) {
+  if (!timings) return null;
+  const now = new Date();
+  const entries = Object.keys(PRAYER_NAMES).map(key => ({
+    key,
+    label: PRAYER_NAMES[key],
+    time: parsePrayerTime(timings[key])
+  }));
+  const upcoming = entries.find(e => e.time > now);
+  return upcoming || entries[0];
+}
+
 function weekDayLogs(logs) {
   const dayLetters = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
   const days = [];
@@ -59,6 +86,29 @@ export default function HomePage() {
   const [dailyDua, setDailyDua] = useState(null);
   const [weekMoods, setWeekMoods] = useState([]);
   const [showEmergency, setShowEmergency] = useState(false);
+  const [prayerTimes, setPrayerTimes] = useState(null);
+  const [prayerError, setPrayerError] = useState(null);
+
+  useEffect(() => {
+    if (!navigator.geolocation) {
+      setPrayerError('Géolocalisation non disponible sur cet appareil.');
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        try {
+          const { latitude, longitude } = pos.coords;
+          const timestamp = Math.floor(Date.now() / 1000);
+          const res = await fetch(`https://api.aladhan.com/v1/timings/${timestamp}?latitude=${latitude}&longitude=${longitude}&method=3`);
+          const json = await res.json();
+          setPrayerTimes(json.data.timings);
+        } catch (e) {
+          setPrayerError("Impossible de récupérer les horaires de prière.");
+        }
+      },
+      () => setPrayerError('Active la localisation pour voir les horaires de prière.')
+    );
+  }, []);
 
   useEffect(() => {
     const fetchDailyDua = async () => {
@@ -137,6 +187,26 @@ export default function HomePage() {
           </div>
         )}
 
+        {prayerTimes && (() => {
+          const next = getNextPrayer(prayerTimes);
+          return next ? (
+            <div style={{ marginTop: '1rem', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--radius-md)', padding: '0.75rem 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <p style={{ fontSize: '0.7rem', opacity: 0.75, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Prochaine prière</p>
+                <p style={{ fontSize: '1.1rem', fontWeight: '600' }}>{next.label}</p>
+              </div>
+              <p style={{ fontSize: '1.5rem', fontWeight: '600' }}>
+                {next.time.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+              </p>
+            </div>
+          ) : null;
+        })()}
+        {!prayerTimes && prayerError && (
+          <div style={{ marginTop: '1rem', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--radius-md)', padding: '0.6rem 0.9rem', fontSize: '0.8rem' }}>
+            🕌 {prayerError}
+          </div>
+        )}
+
         <div style={{ marginTop: '1.25rem', display: 'flex', gap: '0.75rem' }}>
           {todayMood ? (
             <div style={{ background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--radius-sm)', padding: '0.6rem 1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -165,6 +235,25 @@ export default function HomePage() {
       </div>
 
       <div style={{ padding: '1.25rem 1.25rem 0' }}>
+        {/* Prayer times of the day */}
+        {prayerTimes && (
+          <div className="card" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+            {Object.keys(PRAYER_NAMES).map(key => {
+              const isNext = getNextPrayer(prayerTimes)?.key === key;
+              return (
+                <div key={key} style={{ textAlign: 'center', flex: 1 }}>
+                  <p style={{ fontSize: '0.72rem', color: isNext ? 'var(--accent-deep)' : 'var(--charcoal-light)', fontWeight: isNext ? '600' : '400', marginBottom: '0.2rem' }}>
+                    {PRAYER_NAMES[key]}
+                  </p>
+                  <p style={{ fontSize: '0.85rem', fontWeight: isNext ? '700' : '500', color: isNext ? 'var(--accent-deep)' : 'var(--charcoal)' }}>
+                    {prayerTimes[key]}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
         {/* Emergency banner */}
         {showEmergency && (
           <div className="emergency-banner fade-in" style={{ marginBottom: '1rem' }}>
