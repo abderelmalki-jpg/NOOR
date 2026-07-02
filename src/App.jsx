@@ -29,7 +29,11 @@ function ProtectedRoute({ children }) {
       <p style={{ color:'var(--charcoal-light)', fontSize:'0.9rem' }}>Chargement…</p>
     </div>
   </div>;
-  if (!user) return <Navigate to={localStorage.getItem('nour_onboarding_seen') ? '/login' : '/onboarding'} replace />;
+  if (!user) {
+    const isNative = Capacitor.isNativePlatform();
+    const dest = isNative && !localStorage.getItem('nour_onboarding_seen') ? '/onboarding' : '/login';
+    return <Navigate to={dest} replace />;
+  }
   return children;
 }
 
@@ -66,7 +70,7 @@ function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/onboarding" element={<OnboardingPage />} />
+      <Route path="/onboarding" element={Capacitor.isNativePlatform() ? <OnboardingPage /> : <Navigate to="/login" replace />} />
       <Route path="/privacy" element={<PrivacyPolicyPage />} />
       <Route path="/welcome" element={<WelcomePage />} />
       <Route path="/login" element={user ? <Navigate to="/" /> : <LoginPage />} />
